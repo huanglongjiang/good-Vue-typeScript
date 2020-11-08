@@ -1,66 +1,135 @@
 <template>
-  <div>
+    <good-page>
+        <good-breadcrumb :list="constant.breadcrumb.index" />
+        <good-box :data="true">
+        <div class="color-white clearfix padding-10">
+            <div class="height-220 align-center radius-5 padding-20 padding-20 float-left margin-right-20 margin-bottom-20" style="background: rgb(84, 173, 88); width: 48%; min-width: 400px; max-width: 500px;">
+                <div>
+                    <chartist
+                    ratio="ct-major-second"
+                    type="Line"
+                    :data="chartData"
+                    :options="chartOptions" >
+                </chartist>
+                </div>
+                <span>12日内访问量</span>
+            </div>
 
-    <div class="table-data">
-      <table class="table-group panel-9">
-        <thead class="block-header">
-          <tr>
-            <th>头像</th>
-            <th>账号(匿名)</th>
-            <th>邮箱</th>
-            <th>登录账号</th>
-            <th>用户角色</th>
-            <th>来源IP</th>
-            <th>操作类型</th>
-            <th>登录时间</th>
-            <th>操作结果</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-          <template v-for="(item,index) in list">
-            <tr :key="index">
-              <td>{{item.account}}</td>
-              <td>{{item.account}}</td>
-              <td>{{item.email}}</td>
-              <td>{{item.loginType}}</td>
-              <td>{{item.role}}</td>
-              <td>{{item.ip}}</td>
-              <td>{{item.type}}</td>
-              <td>{{item.time}}</td>
-              <td>
-                <span class="a-link pointer margin-right-10">编辑</span>
-                <span class="a-link pointer" @click="remove(index)">删除</span>
-              </td>
-            </tr>
-          </template>
-        </tbody>
-      </table> 
-    </div>
-  </div>
+            <div class="height-220 align-center radius-5 padding-20 padding-20 float-left margin-right-20 margin-bottom-20" style="background:#962eaf; width: 48%; min-width: 400px; max-width: 500px;">
+                <div>
+                    <chartist
+                    ratio="ct-major-second"
+                    type="Bar"
+                    :data="chartData"
+                    :options="chartOptions" >
+                </chartist>
+                </div>
+                <span>12日内访问量</span>
+            </div>
+            <div class="clear"></div>
+            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(32, 160, 255); width: 28%; min-width: 360px;"><div>当前用户访问次数<span class=" block font-size-24 padding-top-10">{{login_total}}</span></div><div class="margin-top-20">上一次访问时间是<span class=" block font-size-24 padding-top-10">{{data.last_time}}</span></div></div>
+
+            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background:#f7ba2a; width: 28%; min-width: 360px;"><span>用户</span><span class="block font-size-36 margin-top-30 align-center">{{user_total}}</span></div>
+
+            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: #f7ba2a; width: 28%; min-width: 360px;"><span>文章</span><span class="block font-size-36 margin-top-30 align-center">{{article_total}}</span></div>
+
+            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(32, 160, 255); width: 28%; min-width: 360px;"><span>访问</span><span class="block font-size-36 margin-top-30 align-center">{{rizhi_total}}</span></div>
+
+            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(247, 186, 42); width: 28%; min-width: 360px;"><span>今日访问</span><span class="block font-size-36 margin-top-30 align-center">{{today_total}}</span></div>
+
+            <div class="width-400 height-180 background-red margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(247, 186, 42); width: 28%; min-width: 360px;"><span>昨日访问</span><span class="block font-size-36 margin-top-30 align-center">{{yesterday_total}}</span></div>
+        </div>
+        </good-box>
+    </good-page>
 </template>
 
 <script lang="ts">
-import service from '@/service/index'
-import { Component, Vue } from 'vue-property-decorator';
-import remove from './mixins/remove'
-import list from './mixins/list'
-
+import { Component,Watch,Vue } from 'vue-property-decorator';
+import list from './mixins/list'     //列表
+import edit from './mixins/edit'   //编辑
+import gsap from "gsap";
 @Component({
-  mixins: [remove,list]
+  mixins: [list,edit],
 })
 export default class Index extends Vue {
-  google: string = "t-10001"
-  list=[]
+
+    chartData= {
+        labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7'],
+        series:[[0,0,0,0,0,0,0]],
+    }
+    chartOptions={
+        width: 460,
+        height: 150,
+        low: 0,
+       /* axisX: {
+            labelInterpolationFnc: function(value, index) {
+              return 30 % 2 === 0 ? 10 : null;
+            }
+        }*/
+    }
+  tweenedNumber=0
+  data={}
+  data2={
+    login_total:0,
+    user_total:0,
+    article_total:0,
+    rizhi_total:0,
+    today_total:0,
+    yesterday_total:0,
+  }
+  list
+  total
+  google= "t-20008"
   params={
-      google: "t-10001",
-      operating: "lists",
-      page: 0,
-      pagesize: 10,
+      "google":this.google,
+      "operating":"lists",
   }
+
+  params2={}
+
+
+  get login_total(){return this.data2.login_total.toFixed(0);}
+  get user_total(){return this.data2.user_total.toFixed(0);}
+  get article_total(){return this.data2.article_total.toFixed(0);}
+  get rizhi_total(){return this.data2.rizhi_total.toFixed(0);}
+  get today_total(){return this.data2.today_total.toFixed(0);}
+  get yesterday_total(){return this.data2.yesterday_total.toFixed(0);}
+
+
   private created() {
-    this.chart='123465dfsdfsf';
-    this.dataList();
+    
+    Promise.all([this.dataList()]).then((res)=>{
+        this.data=res[0];
+        this.$set(this.chartData,'labels',this.data.online_date)
+        this.$set(this.chartData,'series',[this.data.online])
+
+        const data=res[0];
+        gsap.to(this.$data, { duration: 0.5, tweenedNumber: 666666 });
+        gsap.to(this.$data.data2, { duration: 0.5, login_total: data.login_total });
+        gsap.to(this.$data.data2, { duration: 0.5, user_total: data.user_total });
+        gsap.to(this.$data.data2, { duration: 0.5, article_total: data.article_total });
+        gsap.to(this.$data.data2, { duration: 0.5, rizhi_total: data.rizhi_total });
+        gsap.to(this.$data.data2, { duration: 0.5, today_total: data.today_total });
+        gsap.to(this.$data.data2, { duration: 0.5, yesterday_total: data.yesterday_total });
+    })
   }
+
 }
 </script>
+
+
+<style type="text/css">
+.ct-major-second{height: 160px;}
+.ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut {
+    stroke: hsla(0,0%,100%,.8);
+}
+.ct-label {
+    color: hsla(0,0%,100%,.7);
+}
+.ct-grid {
+    stroke: hsla(0,0%,100%,.2);
+    stroke-width: 1px;
+    stroke-dasharray: 2px;
+}
+.ct-chart {height: 150px;}
+</style>

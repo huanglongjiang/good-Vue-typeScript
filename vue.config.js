@@ -1,30 +1,7 @@
-/*const webpack = require("webpack");
+const webpack = require("webpack");
 module.exports = {
   lintOnSave: true,
   productionSourceMap: false,
-  configureWebpack: {
-    plugins: [
-      new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "windows.jQuery": "jquery"
-      })
-    ]
-  },
-  chainWebpack: config => {
-    //忽略的打包文件
-    config.externals({
-      vue: "Vue",
-      "vue-router": "VueRouter",
-      vuex: "Vuex",
-      axios: "axios",
-      "element-ui": "ELEMENT"
-    });
-    const entry = config.entry("app");
-    entry.add("babel-polyfill").end();
-    entry.add("classlist-polyfill").end();
-    entry.add("@/mock").end();
-  },
   devServer: {
     port: 1888,
     proxy: {
@@ -63,15 +40,15 @@ module.exports = {
         //target: "http://test.gateway.36cpc.com", //测试
         //外网prod环境
         // target: '10.116.140.11:31080',
+        //target:'http://127.0.0.1/',
         target:'http://www.good1230.com/',
         //target: 'http://172.28.20.76:8080',
         // target: 'http://sjpt.vanyang.com.cn/api',
         ws: true,
         pathRewrite: {
-          '^/good':'/good'
+          '^/good2':'/good2'
         }
       }
     }
   }
 };
-*/
