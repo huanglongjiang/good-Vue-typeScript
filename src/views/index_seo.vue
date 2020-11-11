@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import service from '@/service/index'
 import list from './mixins/list'     //列表
@@ -40,10 +40,10 @@ import edit from './mixins/edit'   //编辑
 @Component({
   mixins: [list,edit],
 })
-export default class Index extends Vue {
-  @State(state => state.state.permission) permission: any 
+export default class Index extends mixins( list) {
+  @State(state => state.state.permission) permission
   list
-  params:any={
+  params={
       file: "",
       google: "t-10006",
       image: "",
@@ -59,8 +59,8 @@ export default class Index extends Vue {
 
   private created() {
     this.filePath=service.filePath();
-    Promise.all([this.dataList()]).then((res)=>{
-        this.form=res[0]
+    service.api(this.params).then(res =>{
+        this.form=res.data.data
         this.params2={
           google: "t-10006",
           operating:'update',

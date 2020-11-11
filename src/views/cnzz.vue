@@ -21,7 +21,7 @@
                     </thead>
                     <tbody>
                         <template v-for="(item,index) in list">
-                        <tr :class="{'background-disabled':item.status==0}">
+                        <tr :class="{'background-disabled':item.status==0}" :key="index">
                             <td v-if="permission.cnzz_status_all">
                                 <good-checkbox v-model="selected" :label="item.id">
                                     <template v-if="selected.includes(item.id)">已选择</template>
@@ -67,7 +67,6 @@
                     </table> 
                 </div>
             </div>
-            </div>
             <div slot="footer">
                 <good-button type="default" @click="dialogVisible = false">取 消</good-button>
                 <good-button type="primary" @click="submit">确 定</good-button>
@@ -78,7 +77,8 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import list from './mixins/list'     //列表
 import edit from './mixins/edit'   //编辑
@@ -87,8 +87,8 @@ import statusall from './mixins/statusall'   //全选状态设置
 @Component({
   mixins: [list,edit,statusall],
 })
-export default class Index extends Vue {
-  @State(state => state.state.permission) permission: any 
+export default class Index extends mixins( list) {
+  @State(state => state.state.permission) permission
   dialogVisible=false
   list
   total
@@ -105,7 +105,7 @@ export default class Index extends Vue {
   random={random:0}   //用来出发mixins文件，达到数据同步，也不知道为啥得用对象才能同步
 
   @Watch('random',{ deep: true })
-  onRandomChanged(val) {
+  onRandomChanged() {
     this.dataList();
   }
 

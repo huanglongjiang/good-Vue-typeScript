@@ -21,7 +21,7 @@ import service from '@/service/index'
 
 @Component
 export default class goodStatusall extends Vue{
-  @Prop() private data: Array<object>
+  @Prop() private data
 
   random=this.data.random
   editAll(item){

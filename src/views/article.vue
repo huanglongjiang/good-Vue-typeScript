@@ -32,7 +32,7 @@
                     </thead>
                     <tbody>
                         <template v-for="(item,index) in list">
-                            <tr :class="{'background-disabled':item.status==0}">
+                            <tr :class="{'background-disabled':item.status==0}" :key="index">
                                 <td v-if="permission.article_status_all">
                                     <good-checkbox v-model="selected" :label="item.id">
                                         <template v-if="selected.includes(item.id)">已选择</template>
@@ -55,7 +55,7 @@
 
                                 <td>
                                     <template v-for="(items,index) in item.parentName">
-                                        <span class=" padding-2 padding-left-5 padding-right-5 margin-bottom-10">{{items}}
+                                        <span class=" padding-2 padding-left-5 padding-right-5 margin-bottom-10" :key="items">{{items}}
                                             <template v-if="index+1<item.parentName.length">、</template>
                                         </span>
                                     </template>
@@ -94,7 +94,8 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import remove from './mixins/remove'   //删除
 import list from './mixins/list'     //列表
@@ -105,8 +106,8 @@ import service from '@/service/index'
 @Component({
   mixins: [remove,list,edit,statusall],
 })
-export default class Index extends Vue {
-  @State(state => state.state.permission) permission: any 
+export default class Index extends mixins( list) {
+  @State(state => state.state.permission) permission
   dialogVisible=false
   google= "t-10008"
   google2="t-10016"
@@ -131,12 +132,12 @@ export default class Index extends Vue {
   random={random:0}   //用来出发mixins文件，达到数据同步，也不知道为啥得用对象才能同步
 
   @Watch('random',{ deep: true })
-  onRandomChanged(val) {
+  onRandomChanged() {
     this.dataList();
   }
 
   @Watch('params',{ deep: true })
-  onParamsChanged(val) {
+  onParamsChanged() {
     this.dataList();
   }
 

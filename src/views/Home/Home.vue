@@ -3,7 +3,8 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
     <Header />
     <Sidebar />
-    <router-view class="margin-top-10" style="padding-left: 220px; padding-right: 20px; min-height: 560px;"></router-view>
+    <router-view class="margin-top-10" style="padding-left: 220px; padding-right: 20px; min-height: 450px;"></router-view>
+    <Footer />
   </div>
 </template>
 
@@ -11,10 +12,11 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Header from './components/Header.vue';
 import Sidebar from './components/Sidebar.vue';
+import Footer from './components/footer.vue';
 
 @Component({
   components: {
-    Header,Sidebar
+    Header,Sidebar,Footer
   },
 })
 export default class Home extends Vue {}

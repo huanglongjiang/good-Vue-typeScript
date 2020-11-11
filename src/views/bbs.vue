@@ -61,7 +61,8 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch,Vue } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import remove from './mixins/remove'   //删除
 import list from './mixins/list'     //列表
@@ -70,7 +71,7 @@ import service from '@/service/index'
 @Component({
   mixins: [remove,list,edit],
 })
-export default class Index extends Vue {
+export default class Index extends mixins( list) {
   @State(state => state.state.permission) permission: any 
   filePath
   dialogVisible=false

@@ -210,11 +210,11 @@ import service from '@/service/index'
             },
            
             submitForm(){
-                const data={
+                const params={
                         "google":"t-100142",
                         "operating":"select",
                     }
-                this.$axios.post('/good/google.php',data).then(res => { 
+                service.api(params).then(res =>{
                   localStorage.setItem("lastname", "Smith");
                     localStorage.setItem("permission",JSON.stringify(res.data.data.authority));
                     this.form2.id=res.data.data.id

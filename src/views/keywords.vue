@@ -46,7 +46,8 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch,Vue } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import remove from './mixins/remove'   //删除
 import list from './mixins/list'     //列表
@@ -55,9 +56,9 @@ import edit from './mixins/edit'   //编辑
 @Component({
   mixins: [remove,list,edit],
 })
-export default class Index extends Vue {
+export default class Index extends mixins( list) {
   @State(state => state.state.permission) permission: any 
-  columnTitle
+  columnTitle='新增关键词';
   dialogVisible=false
   google= "t-20006"
   list

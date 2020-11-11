@@ -86,18 +86,19 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch,Vue } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import remove from './mixins/remove'   //删除
-import list from './mixins/list'     //列表
+import list from './mixins/list2'     //列表
 import edit from './mixins/edit'   //编辑
 
 @Component({
   mixins: [remove,list,edit],
 })
-export default class Index extends Vue {
+export default class Index extends mixins( list) {
   @State(state => state.state.permission) permission: any
-  columnTitle
+  columnTitle='编辑标签';
   dialogVisible=false
   dialogVisible2=false
   google= "t-20001"
@@ -110,7 +111,13 @@ export default class Index extends Vue {
       name: "",
   }
   params2={}
-  form={}
+  form={
+    keywords:'',
+    image: '',
+    name: '',
+    type: 2,
+    url: '',
+  }
 
   @Watch('listKeywords',{ deep: true })
   onListKeywordsChanged(val) {
@@ -130,6 +137,7 @@ export default class Index extends Vue {
       this.columnTitle='新增标签';
       this.dialogVisible=true;
       this.form={
+        keywords:'',
         image: '',
         name: '',
         type: 2,

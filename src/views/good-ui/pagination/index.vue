@@ -15,15 +15,15 @@
 <script lang="ts">
 import { Component,Prop,Vue } from 'vue-property-decorator';
 @Component
-export default class goodPagination extends Vue{
-  @Prop() private data: Array<object>
+export default class GoodPagination extends Vue{
+  @Prop() private data
 
   currentPage4=0
   params2=this.data.params;
 
   private handleSizeChange(val) {
     console.log(`每页 ${val} 条`);
-  },
+  }
   private handleCurrentChange(val) {
     Object.assign(this.params2, this.data.params, {page: val-1});
   }

@@ -3,7 +3,7 @@
             <div class="layout position-f radius-3" style=" width:400px; height:450px; left:50%; top:50%; margin-left:-200px; margin-top:-253px; opacity:1;">
             <div class="layout border-bottom-0 border-ddd margin-bottom-30">
                 <h3 class="font-size-45 color-primary bold clearfix">
-                    <span class="float-left">hlj designs</span>
+                    <span class="float-left">Vue+typeScript</span>
                 </h3>
             </div>
             <el-tabs v-model="activeName" type="card">
@@ -61,7 +61,7 @@
                     </div>
                 </el-tab-pane>
             </el-tabs>
-            <div class="padding-top-36 line-height-20 align-center font-size-16 margin-top-0"><a class="inline-block none-line" href="http://good1230.com" target="_blank"><i class="fa fa-home font-size-20  float-left color-999" style="color: rgb(85, 85, 85);"></i><span class="padding-left-5 color-999" style="color: rgb(85, 85, 85);">Home</span></a><a class="inline-block margin-left-30 none-line" href="http://www.good1230.com/good_vue2/#/index" target="_blank"><i class="fa fa-github font-size-20  float-left color-999" style="color: rgb(85, 85, 85);"></i><span class="padding-left-5 color-999" style="color: rgb(85, 85, 85);">Github</span></a></div>
+            <div class="padding-top-36 line-height-20 align-center font-size-16 margin-top-0"><a class="inline-block none-line" href="http://good1230.com" target="_blank"><i class="fa fa-home font-size-20  float-left color-999" style="color: rgb(85, 85, 85);"></i><span class="padding-left-5 color-999" style="color: rgb(85, 85, 85);">Home</span></a><a class="inline-block margin-left-30 none-line" href="https://github.com/huanglongjiang/good-Vue-typeScript" target="_blank"><i class="fa fa-github font-size-20  float-left color-999" style="color: rgb(85, 85, 85);"></i><span class="padding-left-5 color-999" style="color: rgb(85, 85, 85);">Github</span></a></div>
             
         </div>
 
@@ -69,7 +69,7 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Component,Vue } from 'vue-property-decorator';
 import service from '@/service/index'
 
 @Component
@@ -77,8 +77,8 @@ export default class Index extends Vue {
     activeName= 'second'
     form={
         name: '',
-        email:'123456@136.com',
-        pass:'123456',
+        email:'',
+        pass:'',
     }
 
   params={

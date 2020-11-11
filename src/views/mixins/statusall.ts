@@ -3,9 +3,8 @@ import service from '@/service/index'
 // 该处需先声明
 declare module 'vue/types/vue' {
   interface Vue {
-    google
-    total:number
-    params
+    list
+    selected
   }
 }
 
@@ -13,7 +12,8 @@ declare module 'vue/types/vue' {
 export default class myMixins extends Vue {
 get selectAll(){return this.list ? this.selected.length == this.list.length : false;}
 set selectAll(value){
-  var selected = [];
+  //var selected = [];
+  const selected:Array<any> = []
       if (value) {
           this.list.forEach(function (item) {
               selected.push(item.id);

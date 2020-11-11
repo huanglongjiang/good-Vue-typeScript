@@ -21,15 +21,16 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Prop,Vue } from 'vue-property-decorator';
+import { Watch,Vue,Prop } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import service from '@/service/index'
 import list from './../../mixins/list'     //列表
 
 @Component({
   mixins: [list],
 })
-export default class Index extends Vue {
-  @Prop() data
+export default class Index extends mixins( list) {
+  @Prop() data!: Array<object>
   google= "t-20006"
   list
   status=0
@@ -58,17 +59,17 @@ export default class Index extends Vue {
   //数据状态
   checked(item){
       const data={
-        "google":this.val.coding,
+        "google":item.coding,
         "operating":"status",
-        "id":this.val.id,
-        "status":this.val.status,
+        "id":item.id,
+        "status":item.status,
       }
 
       
-      service.api(params).then(res =>{
+      service.api(data).then(res =>{
         if(res.status==200){
-          this.val.status=this.val.status==1?0:1;
-          this.$emit('update:val', this.val);
+          item.status=item.status==1?0:1;
+          this.$emit('update:val', item);
         }
                     
       });
@@ -93,7 +94,7 @@ export default class Index extends Vue {
             })
           }else{
             if(this.selectList.length==5){
-              let options={
+              const options:any={
                   type:'warning',
                   message:'最多选择5个关键字',
               }

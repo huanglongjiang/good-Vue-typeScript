@@ -55,7 +55,7 @@ const store = new Vuex.Store({
                     {title:'广告管理',select:false,url:'adsense'},
                     {title:'图片轮播',select:false,url:'slider'},*/
                     {title:'角色权限',select:false,url:'role'},
-                    {title:'菜单设置',select:false,url:'authority'},
+                    // {title:'菜单设置',select:false,url:'authority'},
                     // {title:'新功能开发中',select:false,url:''},
                   ]
                 },

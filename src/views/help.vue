@@ -109,7 +109,8 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch,Vue } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import list from './mixins/list'     //列表
 import edit from './mixins/edit'   //编辑
@@ -119,7 +120,7 @@ import statusall from './mixins/statusall'   //全选状态设置
 @Component({
   mixins: [list,edit,remove,statusall],
 })
-export default class Index extends Vue {
+export default class Index extends mixins( list) {
   @State(state => state.state.permission) permission: any 
   dialogVisible=false
   helpTitle='新增客服'

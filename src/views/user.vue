@@ -30,7 +30,7 @@
                     </thead>
                     <tbody>
                         <template v-for="(item,index) in list">
-                            <tr :class="{'background-disabled':item.status==0}">
+                            <tr :class="{'background-disabled':item.status==0}" :key="index">
                                 <!-- <td>
                                     <good-checkbox v-model="selected" :label="item.id">
                                         <template v-if="selected.includes(item.id)">已选择</template>
@@ -132,20 +132,23 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
+import service from '@/service/index'
 import remove from './mixins/remove'   //删除
-import list from './mixins/list'     //列表
+import list from './mixins/list2'     //列表
 import edit from './mixins/edit'   //编辑
 
 @Component({
   mixins: [remove,list,edit],
 })
-export default class Index extends Vue {
-  @State(state => state.state.permission) permission: any
-  userTitle
+export default class Index extends mixins( list) {
+  @State(state => state.state.permission) permission
+  userTitle='新增用户';
   dialogVisible=false
   google= "t-10010"
+  filePath
   list
   status=0
   total
@@ -163,11 +166,12 @@ export default class Index extends Vue {
   form={}
 
   @Watch('params',{ deep: true })
-  onParamsChanged(val) {
+  onParamsChanged() {
     this.dataList();
   }
 
   private created() {
+    this.filePath=service.filePath();
     this.dataList();
   }
 

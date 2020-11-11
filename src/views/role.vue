@@ -10,9 +10,9 @@
                 <table class="table-group line-height-30">
                     <thead class="block-header">
                         <tr>
-                            <th>角色名称</th>
-                            <th >用户</th>
-                            <th>状态</th>
+                            <th class="width-200">角色名称</th>
+                            <th>用户</th>
+                            <th class="width-100">状态</th>
                           <!--   <th>操作</th> -->
                         </tr>
                     </thead>
@@ -60,7 +60,8 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch,Vue } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import remove from './mixins/remove'   //删除
 import list from './mixins/list'     //列表
 import edit from './mixins/edit'   //编辑
@@ -68,8 +69,7 @@ import service from '@/service/index'
 @Component({
   mixins: [remove,list,edit],
 })
-export default class Index extends Vue {
-  authorityId
+export default class Index extends mixins( list) {
   filePath
   dialogVisible=false
   dialogVisible2=false

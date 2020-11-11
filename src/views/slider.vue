@@ -29,7 +29,7 @@
                     </thead>
                     <tbody>
                         <template v-for="(item,index) in list">
-                            <tr class="width-80" :class="{'background-disabled':item.status==0}">
+                            <tr class="width-80" :class="{'background-disabled':item.status==0}" :key="index">
                                 <td v-if="permission.slider_status_all">
                                     <good-checkbox v-model="selected" :label="item.id">
                                         <template v-if="selected.includes(item.id)">已选择</template>
@@ -115,19 +115,21 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import remove from './mixins/remove'   //删除
 import list from './mixins/list'     //列表
 import edit from './mixins/edit'   //编辑
-import statusall from './mixins/statusall'   //全选状态设置
 import service from '@/service/index'
+import statusall from './mixins/statusall'   //全选状态设置
+
 @Component({
   mixins: [remove,list,edit,statusall],
 })
-export default class Index extends Vue {
-  @State(state => state.state.permission) permission: any 
-  sliderTitle:string='新增轮播图'
+export default class Index extends mixins( list) {
+  @State(state => state.state.permission) permission
+  sliderTitle='新增轮播图'
   filePath
   dialogVisible=false
   google= "t-10007"
@@ -148,12 +150,12 @@ export default class Index extends Vue {
   random={random:0}   //用来出发mixins文件，达到数据同步，也不知道为啥得用对象才能同步
 
   @Watch('random',{ deep: true })
-  onRandomChanged(val) {
+  onRandomChanged() {
     this.dataList();
   }
 
   @Watch('params',{ deep: true })
-  onParamsChanged(val) {
+  onParamsChanged() {
     this.dataList();
   }
 

@@ -20,10 +20,9 @@
                             <th>操作结果</th>
                         </tr>
                     </thead>
-                    </thead>
                     <tbody>
                         <template v-for="(item,index) in list">
-                        <tr>
+                        <tr :key="index">
                             <td>
                                 <div class="line-height-30 padding-3">
                                     <template v-if="item.file!=''">
@@ -57,13 +56,16 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
+import service from '@/service/index'
 import list from './mixins/list'     //列表
 
 @Component({
   mixins: [list],
 })
-export default class Index extends Vue {
+export default class Index extends mixins( list) {
+  filePath
   list
   total
   params={
@@ -74,10 +76,11 @@ export default class Index extends Vue {
   }
 
   @Watch('params',{ deep: true })
-  onParamsChanged(val) {
+  onParamsChanged() {
     this.dataList();
   }
   private created() {
+    this.filePath=service.filePath();
     this.dataList();
   }
 

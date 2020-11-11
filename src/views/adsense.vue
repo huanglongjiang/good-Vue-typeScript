@@ -158,7 +158,8 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch,Vue } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import remove from './mixins/remove'   //删除
 import list from './mixins/list'     //列表
@@ -168,9 +169,9 @@ import statusall from './mixins/statusall'   //全选状态设置
 @Component({
   mixins: [remove,list,edit,statusall],
 })
-export default class Index extends Vue {
+export default class Index extends mixins( list) {
   @State(state => state.state.permission) permission: any 
-  AdsenseTitle
+  AdsenseTitle='新增广告位';
   dialogVisible=false
   google= "t-10003"
   list

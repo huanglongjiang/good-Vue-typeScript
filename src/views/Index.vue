@@ -27,31 +27,32 @@
                 <span>12日内访问量</span>
             </div>
             <div class="clear"></div>
-            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(32, 160, 255); width: 28%; min-width: 360px;"><div>当前用户访问次数<span class=" block font-size-24 padding-top-10">{{login_total}}</span></div><div class="margin-top-20">上一次访问时间是<span class=" block font-size-24 padding-top-10">{{data.last_time}}</span></div></div>
+            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(32, 160, 255); width: 28%; min-width: 360px;"><div>当前用户访问次数<span class=" block font-size-24 padding-top-10">{{loginTotal}}</span></div><div class="margin-top-20">上一次访问时间是<span class=" block font-size-24 padding-top-10">{{lastTime}}</span></div></div>
 
-            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background:#f7ba2a; width: 28%; min-width: 360px;"><span>用户</span><span class="block font-size-36 margin-top-30 align-center">{{user_total}}</span></div>
+            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background:#f7ba2a; width: 28%; min-width: 360px;"><span>用户</span><span class="block font-size-36 margin-top-30 align-center">{{userTotal}}</span></div>
 
-            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: #f7ba2a; width: 28%; min-width: 360px;"><span>文章</span><span class="block font-size-36 margin-top-30 align-center">{{article_total}}</span></div>
+            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: #f7ba2a; width: 28%; min-width: 360px;"><span>文章</span><span class="block font-size-36 margin-top-30 align-center">{{articleTotal}}</span></div>
 
-            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(32, 160, 255); width: 28%; min-width: 360px;"><span>访问</span><span class="block font-size-36 margin-top-30 align-center">{{rizhi_total}}</span></div>
+            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(32, 160, 255); width: 28%; min-width: 360px;"><span>访问</span><span class="block font-size-36 margin-top-30 align-center">{{rizhiTotal}}</span></div>
 
-            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(247, 186, 42); width: 28%; min-width: 360px;"><span>今日访问</span><span class="block font-size-36 margin-top-30 align-center">{{today_total}}</span></div>
+            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(247, 186, 42); width: 28%; min-width: 360px;"><span>今日访问</span><span class="block font-size-36 margin-top-30 align-center">{{todayTotal}}</span></div>
 
-            <div class="width-400 height-180 background-red margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(247, 186, 42); width: 28%; min-width: 360px;"><span>昨日访问</span><span class="block font-size-36 margin-top-30 align-center">{{yesterday_total}}</span></div>
+            <div class="width-400 height-180 background-red margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(247, 186, 42); width: 28%; min-width: 360px;"><span>昨日访问</span><span class="block font-size-36 margin-top-30 align-center">{{yesterdayTotal}}</span></div>
         </div>
         </good-box>
     </good-page>
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
+import service from '@/service/index'
 import list from './mixins/list'     //列表
 import edit from './mixins/edit'   //编辑
 import gsap from "gsap";
 @Component({
   mixins: [list,edit],
 })
-export default class Index extends Vue {
+export default class Index extends mixins( list) {
 
     chartData= {
         labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7'],
@@ -68,14 +69,15 @@ export default class Index extends Vue {
         }*/
     }
   tweenedNumber=0
-  data={}
+
+  lastTime=''
   data2={
-    login_total:0,
-    user_total:0,
-    article_total:0,
-    rizhi_total:0,
-    today_total:0,
-    yesterday_total:0,
+    loginTotal:0,
+    userTotal:0,
+    articleTotal:0,
+    rizhiTotal:0,
+    todayTotal:0,
+    yesterdayTotal:0,
   }
   list
   total
@@ -88,29 +90,29 @@ export default class Index extends Vue {
   params2={}
 
 
-  get login_total(){return this.data2.login_total.toFixed(0);}
-  get user_total(){return this.data2.user_total.toFixed(0);}
-  get article_total(){return this.data2.article_total.toFixed(0);}
-  get rizhi_total(){return this.data2.rizhi_total.toFixed(0);}
-  get today_total(){return this.data2.today_total.toFixed(0);}
-  get yesterday_total(){return this.data2.yesterday_total.toFixed(0);}
+  get loginTotal(){return this.data2.loginTotal.toFixed(0);}
+  get userTotal(){return this.data2.userTotal.toFixed(0);}
+  get articleTotal(){return this.data2.articleTotal.toFixed(0);}
+  get rizhiTotal(){return this.data2.rizhiTotal.toFixed(0);}
+  get todayTotal(){return this.data2.todayTotal.toFixed(0);}
+  get yesterdayTotal(){return this.data2.yesterdayTotal.toFixed(0);}
 
 
   private created() {
-    
-    Promise.all([this.dataList()]).then((res)=>{
-        this.data=res[0];
-        this.$set(this.chartData,'labels',this.data.online_date)
-        this.$set(this.chartData,'series',[this.data.online])
+    service.api(this.params).then(res =>{
+      
+        this.lastTime=res.data.last_time;
+        this.$set(this.chartData,'labels',res.data.online_date)
+        this.$set(this.chartData,'series',[res.data.online])
 
-        const data=res[0];
-        gsap.to(this.$data, { duration: 0.5, tweenedNumber: 666666 });
-        gsap.to(this.$data.data2, { duration: 0.5, login_total: data.login_total });
-        gsap.to(this.$data.data2, { duration: 0.5, user_total: data.user_total });
-        gsap.to(this.$data.data2, { duration: 0.5, article_total: data.article_total });
-        gsap.to(this.$data.data2, { duration: 0.5, rizhi_total: data.rizhi_total });
-        gsap.to(this.$data.data2, { duration: 0.5, today_total: data.today_total });
-        gsap.to(this.$data.data2, { duration: 0.5, yesterday_total: data.yesterday_total });
+        const data=res.data;
+
+        gsap.to(this.$data.data2, { duration: 0.5, loginTotal: data.login_total });
+        gsap.to(this.$data.data2, { duration: 0.5, userTotal: data.user_total });
+        gsap.to(this.$data.data2, { duration: 0.5, articleTotal: data.article_total });
+        gsap.to(this.$data.data2, { duration: 0.5, rizhiTotal: data.rizhi_total });
+        gsap.to(this.$data.data2, { duration: 0.5, todayTotal: data.today_total });
+        gsap.to(this.$data.data2, { duration: 0.5, yesterdayTotal: data.yesterday_total });
     })
   }
 

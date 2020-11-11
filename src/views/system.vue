@@ -20,8 +20,8 @@
                         <tr>
                             <tds-label class=" position-r">前台LOGO：</tds-label>                    
                             <td>
-                                <good-upload id="u2" type="logo" :data.sync='form' v-if="permission.system_upload"></good-upload>
-                                <img class="width-150 height-150 radius-3" :src="filePath+'/'+form.file" v-else>
+                                <!-- <good-upload id="u2" type="logo" :data.sync='form' v-if="permission.system_upload"></good-upload> -->
+                                <img class="width-150 height-150 radius-3" :src="filePath+'/'+form.file">
                             </td>
                         </tr>
                         <tr>
@@ -39,16 +39,17 @@
 </template>
 
 <script lang="ts">
-import { Component,Watch,Vue } from 'vue-property-decorator';
+import { Watch,Vue } from 'vue-property-decorator';
+import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import service from '@/service/index'
-import list from './mixins/list'     //列表
+import list from './mixins/list2'     //列表
 import edit from './mixins/edit'   //编辑
 
 @Component({
   mixins: [list,edit],
 })
-export default class Index extends Vue {
+export default class Index extends mixins( list) {
   @State(state => state.state.permission) permission: any 
   list
   params={
@@ -67,8 +68,8 @@ export default class Index extends Vue {
 
   private created() {
     this.filePath=service.filePath();
-    Promise.all([this.dataList()]).then((res)=>{
-        this.form=res[0]
+    service.api(this.params).then(res =>{
+        this.form=res.data.data
         this.params2={
           google: "t-10005",
           operating:'update',

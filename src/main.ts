@@ -1,27 +1,22 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Vuex from 'vuex';
-import store from './vuex/store';
-import path from './vuex/global'
+import store from './vuex/store'
+import moment from 'moment';
 import constant from './vuex/const'
 import './registerServiceWorker'
 import router from './router'
 /*import store from './store'*/
 import axios from 'axios'
-import ElementUI from 'element-ui';
-import Ehartist from 'vue-chartist';
-import button from './button.css-1.0.4-2/css/button.css'
-import chartist from './button.css-1.0.4-2/chartist.min.css'
-import style from './button.css-1.0.4-2/style.css'
-import style2 from './button/style.css'
-import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
+import ElementUI from 'element-ui'
+import Ehartist from 'vue-chartist'
+import './button.css-1.0.4-2/css/button.css'
+import './button.css-1.0.4-2/chartist.min.css'
+import './button.css-1.0.4-2/style.css'
+import './button/style.css'
+import 'element-ui/lib/theme-chalk/index.css'    // 默认主题
 import Good from './views/index.js'
 Vue.use(Good)
 Vue.config.productionTip = false
-Vue.use(button)
-Vue.use(chartist)
-Vue.use(style)
-Vue.use(style2)
 Vue.use(ElementUI);
 Vue.use(Ehartist);
 Vue.prototype.$axios = axios;
@@ -59,8 +54,7 @@ config => {
 })
 
 
-axios.interceptors.response.use(
- res => {
+axios.interceptors.response.use((res: any) => {
   // console.log(num)
    num--
 if(res.data.retType === 'failed'){
@@ -74,7 +68,7 @@ if(res.data.retType === 'failed'){
     }
 
     if(res.data.retType==='success'||res.data.retType==='error'||res.data.retType==='warning'||res.data.retType==='info') {
-     const options={
+     const options: any={
           type:res.data.retType,
           message:res.data.message,
       }
@@ -93,7 +87,7 @@ if(res.data.retType === 'failed'){
 
     return res;
 },
-error => {
+(error: any) => {
   /*let options={
           type:"warning",
           message:'接口请求异常！',

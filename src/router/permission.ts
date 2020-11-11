@@ -11,8 +11,9 @@ function hasPermission(route, role) {
 }
 
 // 该处的role为登录角色，可根据实际需要进行动态生成
-export const generateRoutes = function(asyncRoutes, role){
-  const res= []
+//export const generateRoutes = function(asyncRoutes, role){
+  export const generateRoutes = function(asyncRoutes:Array<any>, role:string): Array<any> {
+  const res:Array<any> = []
   asyncRoutes.forEach(item => {
     //console.log(item)
     const mid = {...item}

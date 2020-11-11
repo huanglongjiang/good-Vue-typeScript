@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home/Home.vue'
-import { generateRoutes } from './permission.ts'
+import { generateRoutes } from './permission'
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -9,21 +9,20 @@ const routes: Array<RouteConfig> = [
       path: '*', // 页面不存在的情况下会跳到404页面
       redirect: '/index',
       name: 'notFound',
-      hidden: true
   },
   {
     path: '/',
     name: 'Home',
     component: Home,
     children: [
-      {
+      /*{
             path: '/authority',
             component: resolve => require(['../views/authority.vue'], resolve),
             name: 'authority',
             meta: {
               roles: true  // 该部分和权限相关
             }
-        },
+        },*/
         {
             path: '/role',
             name: 'role',
@@ -302,11 +301,9 @@ let routes2= [
         let router=[...routes]
         let generateAsyncRoutes = generateRoutes(routes2, permission)  // 根据登录角色生成动态路由
         router = router.concat(generateAsyncRoutes)
-        console.log(router)
-    
        Object.assign(routes,router);
     }
-console.log(routes)
+
 const router = new VueRouter({
   //mode: 'history',
   base: process.env.BASE_URL,

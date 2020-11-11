@@ -12,16 +12,16 @@
   <ul class="align-left padding-20">
     <template v-for="(item,index) in data.roleList">
 
-    <li class="block padding-5 font-size-14 background-primary color-white" v-if="data.roleId===item.id">{{index+1}}、{{item.title}}
+    <li :key="index" class="block padding-5 font-size-14 background-primary color-white" v-if="data.roleId===item.id">{{index+1}}、{{item.title}}
     </li>
-    <li class="block padding-5 font-size-14 pointer" v-else @click="Submit(item,data)">{{index+1}}、{{item.title}}
+    <li :key="index" class="block padding-5 font-size-14 pointer" v-else @click="Submit(item,data)">{{index+1}}、{{item.title}}
     </li>
     </template>
   </ul>
 
   <ul class="align-left padding-20">
     <li class="block padding-5 font-size-14 pointer"><a class="a-link" href="http://www.good1230.com/good_vue2/#/index">1、vue管理平台</a></li>
-    <li class="block padding-5 font-size-14 pointer"><a class="a-link" href="http://www.good1230.com/good_vue_typescript/#/index">2、vue+typescript管理平台</a></li>
+    <li class="block padding-5 font-size-14 background-primary color-white">2、vue+typescript管理平台</li>
     <li class="block padding-5 font-size-14 pointer"><a class="a-link" href="http://www.good1230.com/react/">3、react管理平台</a></li>
   </ul>
 </div>
@@ -41,7 +41,7 @@ showBool=false
 showBool2=false
 value1=20
 form={
-  id:'',
+  userId:'',
   roleId:'',
 }
 
@@ -67,7 +67,7 @@ form={
     service.api(params).then(res =>{
       if(res.data.retType=='success'){
         this.data.roleId=item.id
-        this.$emit('updata:data',data)
+        this.$emit('updata:data',this.data)
        
       }
     });
