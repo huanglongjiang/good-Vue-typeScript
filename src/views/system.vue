@@ -20,8 +20,8 @@
                         <tr>
                             <tds-label class=" position-r">前台LOGO：</tds-label>                    
                             <td>
-                                <!-- <good-upload id="u2" type="logo" :data.sync='form' v-if="permission.system_upload"></good-upload> -->
-                                <img class="width-150 height-150 radius-3" :src="filePath+'/'+form.file">
+                               <good-upload :data='{form,id:"u2",type:"logo"}' v-if="permission.system_upload"></good-upload>
+                                <img class="width-150 height-150 radius-3" v-else :src="filePath+'/'+form.file">
                             </td>
                         </tr>
                         <tr>
@@ -39,7 +39,6 @@
 </template>
 
 <script lang="ts">
-import { Watch,Vue } from 'vue-property-decorator';
 import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import service from '@/service/index'
@@ -50,7 +49,7 @@ import edit from './mixins/edit'   //编辑
   mixins: [list,edit],
 })
 export default class Index extends mixins( list) {
-  @State(state => state.state.permission) permission: any 
+  @State(state => state.state.permission) permission
   list
   params={
       file: "",

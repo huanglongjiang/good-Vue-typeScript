@@ -30,10 +30,9 @@
                             <th v-if="permission.adsense_edit || permission.adsense_delete">操作</th>
                         </tr>
                     </thead>
-                    </thead>
                     <tbody>
                         <template v-for="(item,index) in list">
-                            <tr :class="{'background-disabled':item.status==0}">
+                            <tr :class="{'background-disabled':item.status==0}" :key="index">
                                 <td v-if="permission.adsense_status_all">
                                     <good-checkbox v-model="selected" :label="item.id">
                                         <template v-if="selected.includes(item.id)">已选择</template>
@@ -46,8 +45,8 @@
                                 <td>{{item.price}}</td>
                                 <td>{{item.size}}</td>
                                 <td>{$adsense.{{item.id}}}</td>
-                                <td>{{item.starttime,'YYYY-MM-DD' | moment}}</td>
-                                <td>{{item.endtime,'YYYY-MM-DD' | moment}}</td>
+                                <td>{{item.starttime , 'YYYY-MM-DD' | moment}}</td>
+                                <td>{{item.endtime , 'YYYY-MM-DD' | moment}}</td>
 
                                 <td>
                                     <good-switch :data="{item,google}" :key="index" v-if="permission.adsense_status"></good-switch>
@@ -129,8 +128,8 @@
                         <tr>
                                 <tds-label>广告图片</tds-label>
                                 <td>
-                                    <!-- <good-upload id="u4" type="adsense " :data.sync='form'></good-upload>
-                                    <div class="color-ccc font-size-12 margin-bottom-10">图片地址{{state.Imgpath}}adsense/{{form.image}}</div> -->
+                                    <good-upload :data='{form,id:"u4",type:"adsense"}' v-if="permission.system_upload"></good-upload>
+                                    <!-- <div class="color-ccc font-size-12 margin-bottom-10">图片地址{{state.Imgpath}}adsense/{{form.image}}</div> -->
                                 </td>
                         </tr> 
                         <tr>
@@ -158,7 +157,7 @@
 </template>
 
 <script lang="ts">
-import { Watch,Vue } from 'vue-property-decorator';
+import { Watch } from 'vue-property-decorator';
 import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import remove from './mixins/remove'   //删除
@@ -193,12 +192,12 @@ export default class Index extends mixins( list) {
   random={random:0}   //用来出发mixins文件，达到数据同步，也不知道为啥得用对象才能同步
 
   @Watch('random',{ deep: true })
-  onRandomChanged(val) {
+  onRandomChanged() {
     this.dataList();
   }
   
   @Watch('params',{ deep: true })
-  onParamsChanged(val) {
+  onParamsChanged() {
     this.dataList();
   }
 

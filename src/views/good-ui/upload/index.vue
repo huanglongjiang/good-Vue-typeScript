@@ -2,7 +2,7 @@
   <div class="layout">
     <el-upload
       class="avatar-uploader"
-      :action="server+'?type='+id"
+      :action="server+'?type='+data.id"
       :show-file-list="false"
       :on-success="handleAvatarSuccess"
       :before-upload="beforeAvatarUpload">
@@ -15,67 +15,58 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script lang="ts">
+import { Component,Watch,Prop,Vue } from 'vue-property-decorator';
 import service from '@/service/index'
-  export default {
-    props:['id','type','data'],
-    data() {
-      return {
-        imageUrl:'',
-        server:'',
-        filePath:'',
-      };
-    },
-    created: function() {
-      this.server=service.upload();
-      this.filePath=service.filePath();
+@Component
+export default class GoodUpload extends Vue{
+  @Prop() private data
+  server=''
+  imageUrl=''
+  filePath=''
+  private created() {
+    this.server=service.upload();
+    this.filePath=service.filePath();
+    this.loadImg(this.data);
+  }
 
-      if(this.data=='undefined'||this.data.file=="") {
-        this.imageUrl='';
-      }else if(this.data.file.length<7){
-        this.imageUrl=`http://www.good1230.com/good/RandomUser//${this.data.file}`;
-      }else{
-        this.imageUrl=`${this.filePath}/${this.data.file}`;
-      }
+  @Watch('data',{ deep: true })
+  onDataChanged(data) {
+    this.loadImg(data);
+  }
 
-    },
-    watch: {
-        data(val) {
-            if(this.data.file=='undefined'||this.data.file=="") {
-              this.imageUrl='';
-            }else if(this.data.file.length<7){
-              this.imageUrl=`http://www.good1230.com/good/RandomUser//${this.data.file}`;
-            }else{
-              this.imageUrl=`${this.filePath}/${this.data.file}`;
-            }
-        }
-      },
-  
-      computed: {
-          ...mapState(['state']),
-    },
-    methods: {
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-        this.data.image=res.name;
-        this.data.file=res.file;
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+  loadImg(data){
 
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
-      }
+    if(data=='undefined'||data.form.file=="") {
+      this.imageUrl='';
+    }
+    if(data.form.file!=undefined&&data.form.file.length<7){
+      this.imageUrl=`http://www.good1230.com/good/RandomUser//${this.data.form.file}`;
+    }
+     if(data.form.file!=undefined&&data.form.file.length>7){
+      this.imageUrl=`${this.filePath}/${this.data.form.file}`;
     }
   }
+  handleAvatarSuccess(res, file) {
+    this.imageUrl = URL.createObjectURL(file.raw);
+    this.data.form.image=res.name;
+    this.data.form.file=res.file;
+  }
+  beforeAvatarUpload(file) {
+    const isJPG = file.type === 'image/jpeg';
+    const isLt2M = file.size / 1024 / 1024 < 2;
+
+    if (!isJPG) {
+      this.$message.error('上传头像图片只能是 JPG 格式!');
+    }
+    if (!isLt2M) {
+      this.$message.error('上传头像图片大小不能超过 2MB!');
+    }
+    return isJPG && isLt2M;
+  }
+}
 </script>
+
 <style>
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;

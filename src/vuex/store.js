@@ -23,8 +23,8 @@ const store = new Vuex.Store({
             marquee:"精简个人博客网站平台管理系统，售价 ￥150 元！有需要或想了解的朋友们请联系QQ：2970302840",
             authority:'',
             account:'',
-            bbs_total:0,
-            log_total:0,
+            bbsTotal:0,
+            logTotal:0,
             path:'',
             paramsType:0,
             paramsStatus:0,
@@ -89,38 +89,10 @@ const store = new Vuex.Store({
 
 	},
   mutations: {
-    remove (state,item) {
-      console.log(item)
-      const options={
-          type:"info",
-          visible:true,
-          msg:"此操作将永久删除该文件, 是否继续?",
-          data:"操作成功",
-      }
-
-      /*this.$hlj.confirm(options).then(res=>{
-          const data={
-              "google":item.coding,
-              "operating":"delete",
-              "id":item.id,
-          }
-          this.$axios.post(global.APIPATH,data).then(res => {
-              if(res.status==200){
-                  const options={
-                      type:"success",
-                      message:res.data.result,
-                  }
-                  this.$hlj.message(options)
-                  this.dataList(); 
-              }       
-          })
-      })*/
-    }
+    
   },
   actions: {
-    remove (context,item) {
-      context.commit('remove',item)
-    }
+    
   }
 })
 export default store

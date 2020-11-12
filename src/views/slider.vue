@@ -98,7 +98,8 @@
                     <tr>
                         <tds-label>图片路径：</tds-label>
                         <td>
-                        <good-upload id="u3" type="slider" :data.sync='form'></good-upload>
+                        
+                        <good-upload :data='{form,id:"u3",type:"slider"}'></good-upload>
                         </td>
                     </tr>
                 </table> 

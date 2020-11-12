@@ -49,18 +49,18 @@
                 <i class="fa fa-lock font-size-18" style="color: #adb5bd;"></i>
             </li> -->
 
-            <!-- <li class="width-30 height-30 line-height-30 align-center inline-block padding-bottom-5 margin-left-30 radius-4 float-right position-r radius-20 pointer" style="color: #adb5bd; top:-3px;" title="编辑个人资料" @click="select()">
-              
-                <i class="fa fa-user font-size-18" style="color: #adb5bd;"></i>
-            </li> -->
-            <li class="width-30 height-30 line-height-30 align-center inline-block padding-bottom-5 margin-left-30 radius-4 float-right position-r radius-20 no-drop" style="color: #adb5bd; top:-3px;" title="编辑个人资料">
+            <li class="width-30 height-30 line-height-30 align-center inline-block padding-bottom-5 margin-left-30 radius-4 float-right position-r radius-20 pointer" style="color: #adb5bd; top:-3px;" title="编辑个人资料" @click="select()">
               
                 <i class="fa fa-user font-size-18" style="color: #adb5bd;"></i>
             </li>
+            <!-- <li class="width-30 height-30 line-height-30 align-center inline-block padding-bottom-5 margin-left-30 radius-4 float-right position-r radius-20 no-drop" style="color: #adb5bd; top:-3px;" title="编辑个人资料">
+              
+                <i class="fa fa-user font-size-18" style="color: #adb5bd;"></i>
+            </li> -->
             <router-link to="bbs" tag="li" class="width-30 height-30 line-height-30 align-center inline-block padding-bottom-5 margin-left-20 radius-4 float-right position-r radius-20 pointer " style="color: #adb5bd; top:-3px;">
                 <i class="fa fa-envelope-o font-size-18 color-white" style="color: #adb5bd;"></i>
             
-                <good-info class="position-a left-20 height-18 line-height-18" :data="state.bbs_total" v-if="state.bbs_total" style="top: -10px;"></good-info>
+                <good-info class="position-a left-20 height-18 line-height-18" :data="state.bbsTotal" v-if="state.bbsTotal" style="top: -10px;"></good-info>
                 <good-info class="position-a left-20 height-18 line-height-18" :data="0" v-else style="top: -10px;"></good-info>
             </router-link>
             
@@ -96,31 +96,30 @@
                   
                   <tr>
                       <tds-label>用户邮箱：</tds-label>
-                      <td><good-input v-model="form.email" :disabled="true"></good-input></td>
+                      <td><el-input v-model="form.email" disabled></el-input></td>
                   </tr>
                   
                   <tr>
                       <tds-label>用户类型：</tds-label>
 
-                      <td><div type="text" class="input-default line-height-34 width-max" readonly="readonly">
-                        <template v-if="form.role==0">普通用户</template>
-                        <template v-if="form.role==1">管理员</template>
-                        <template v-if="form.role==2">超级管理员</template>
-                      </div>
+                      <td>
+                        <el-input v-if="form.role==0" value="普通用户" disabled></el-input>
+                        <el-input v-if="form.role==1" value="管理员" disabled></el-input>
+                        <el-input v-if="form.role==2" value="超级管理员" disabled></el-input>
                       </td>
                   </tr>
                   <tr>
                       <tds-label>用户角色：</tds-label>
-                      <td><good-input v-model="form.roleName" :disabled="true"></good-input></td>
+                      <td><el-input v-model="form.roleName" disabled></el-input></td>
                   </tr>
                   <tr>
                       <tds-label>用户名称：</tds-label>
-                      <td><good-input v-model="form.name"></good-input></td>
+                      <td><el-input v-model="form.name"></el-input></td>
                   </tr>
                   <tr>
                       <tds-label class=" position-r">用户头像：</tds-label>
                       <td>
-                        <good-upload id="u1" type="user" :data.sync='form'></good-upload>
+                        <good-upload :data='{form,id:"u1",type:"user"}'></good-upload>
                       </td>
                   </tr>
 
@@ -139,11 +138,11 @@
               <table class="table-group">
                   <tr>
                       <tds-label>旧密码：</tds-label>
-                      <td><good-input v-model="form2.passOld"></good-input></td>
+                      <td><el-input v-model="form2.passOld"></el-input></td>
                   </tr>
                   <tr>
                       <tds-label>新密码：</tds-label>
-                      <td><good-input v-model="form2.passNew"></good-input></td>
+                      <td><el-input v-model="form2.passNew"></el-input></td>
                   </tr>
               </table> 
           </div>
@@ -225,8 +224,8 @@ import service from '@/service/index'
                     this.state.authority=res.data.data.role;
                     this.constant.authority=res.data.data.role;
                     this.state.account=res.data.data.account;
-                    this.state.bbs_total=res.data.bbs_total;
-                    this.state.log_total=res.data.log_total;
+                    this.state.bbsTotal=res.data.bbs_total;
+                    this.state.logTotal=res.data.log_total;
                     this.state.permission=res.data.data.authority;
                     this.state.roleId=res.data.data.roleId;
                     this.state.menu2=res.data.data.menu;
@@ -234,12 +233,12 @@ import service from '@/service/index'
                 })
             },
             Submit(index){
-                const data={
+                const params={
                     "google":"t-10014",
                     "operating":"update",
                     "form":this.form
                 }
-                this.$axios.post(global.APIPATH,data).then(res => {  
+                service.api(params).then(res =>{
                   if(res.data.retType=='success'){
                     this.dialogShow=false; 
                     this.submitForm();
@@ -247,12 +246,12 @@ import service from '@/service/index'
                 });
             },
             SubmitEdit(index){
-                const data={
+                const params={
                     "google":"t-10014",
                     "operating":"updatePass",
                     "form":this.form2
                 }
-                this.$axios.post(global.APIPATH,data).then(res => {   
+                service.api(params).then(res =>{
                   if(res.data.retType=='success'){
                     this.dialogShow2=false; 
                   }
