@@ -96,7 +96,7 @@ export default class Index extends Vue {
     service.api(this.params).then(res =>{
         if(res.data.retType=='success'){
            localStorage.token = res.data.token;
-           this.$router.push('/index');
+           this.$router.push('/role');
         }
     })
   }
