@@ -117,5 +117,7 @@ export default class Index extends mixins( list) {
     background-color: #e4e8f1;
     border-color: #e4e8f1;
     color: #48576a;
+    height: 24px;
+    line-height: 24px;
    }
 </style>

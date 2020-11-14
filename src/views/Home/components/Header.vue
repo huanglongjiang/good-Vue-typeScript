@@ -39,15 +39,15 @@
               
                 <i class="fa fa-sign-in font-size-18" style="color: #adb5bd;"></i>
             </li>
-            <li class="width-30 height-30 line-height-30 align-center inline-block padding-bottom-5 margin-left-20 radius-4 float-right position-r radius-20  no-drop" style="color: #adb5bd; top:-3px;" title="修改密码">
-              
-                <i class="fa fa-lock font-size-18" style="color: #adb5bd;"></i>
-            </li>
-
-            <!-- <li class="width-30 height-30 line-height-30 align-center inline-block padding-bottom-5 margin-left-20 radius-4 float-right position-r radius-20 pointer" style="color: #adb5bd; top:-3px;" title="修改密码" @click="editPass()">
+            <!-- <li class="width-30 height-30 line-height-30 align-center inline-block padding-bottom-5 margin-left-20 radius-4 float-right position-r radius-20  no-drop" style="color: #adb5bd; top:-3px;" title="修改密码">
               
                 <i class="fa fa-lock font-size-18" style="color: #adb5bd;"></i>
             </li> -->
+
+            <li class="width-30 height-30 line-height-30 align-center inline-block padding-bottom-5 margin-left-20 radius-4 float-right position-r radius-20 pointer" style="color: #adb5bd; top:-3px;" title="修改密码" @click="editPass()">
+              
+                <i class="fa fa-lock font-size-18" style="color: #adb5bd;"></i>
+            </li>
 
             <li class="width-30 height-30 line-height-30 align-center inline-block padding-bottom-5 margin-left-30 radius-4 float-right position-r radius-20 pointer" style="color: #adb5bd; top:-3px;" title="编辑个人资料" @click="select()">
               

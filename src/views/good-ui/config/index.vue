@@ -12,7 +12,7 @@
   <ul class="align-left padding-20">
     <template v-for="(item,index) in data.roleList">
 
-    <li :key="index" class="block padding-5 font-size-14 background-primary color-white" v-if="data.roleId===item.id">{{index+1}}、{{item.title}}
+    <li :key="index" class="block padding-5 padding-left-10 padding-right-10 font-size-14 background-primary color-white inline-block radius-5" v-if="data.roleId===item.id">{{index+1}}、{{item.title}}
     </li>
     <li :key="index" class="block padding-5 font-size-14 pointer" v-else @click="Submit(item,data)">{{index+1}}、{{item.title}}
     </li>
@@ -20,9 +20,16 @@
   </ul>
 
   <ul class="align-left padding-20">
-    <li class="block padding-5 font-size-14 pointer"><a class="a-link" href="http://www.good1230.com/good_vue2/#/index">1、vue管理平台</a></li>
-    <li class="block padding-5 font-size-14 background-primary color-white">2、vue+typescript管理平台</li>
-    <li class="block padding-5 font-size-14 pointer"><a class="a-link" href="http://www.good1230.com/react/">3、react管理平台</a></li>
+    <li class="block padding-5 font-size-14 pointer"><a class="none-line a-666" target="_blank" href="http://www.good1230.com/good_vue2/#/index">1、vue管理平台</a></li>
+    <li class="block padding-5 padding-left-10 padding-right-10 font-size-14 background-primary color-white inline-block radius-5">2、vue+typescript管理平台</li>
+    <li class="block padding-5 font-size-14 pointer"><a class="none-line a-666" target="_blank" href="http://www.good1230.com/react/">3、react管理平台</a></li>
+  </ul>
+
+  <ul class="align-left padding-20">
+    <li class="block padding-5 font-size-14">切换主题</li>
+    <li class="block padding-5 font-size-14 pointer">
+        <el-color-picker v-model="color"></el-color-picker>
+    </li>
   </ul>
 </div>
 </div>
@@ -31,18 +38,26 @@
 </template>
 
 <script lang="ts">
-import { Component,Prop,Vue } from 'vue-property-decorator';
+import { Component,Prop,Watch,Vue } from 'vue-property-decorator';
 import service from '@/service/index'
-
+import Color from './../../../../public/color.js'
 @Component
 export default class Index extends Vue {
 @Prop() data
+color=localStorage.getItem("color")==null?'#4fc08d':localStorage.getItem("color")
 showBool=false
 showBool2=false
 value1=20
 form={
   userId:'',
   roleId:'',
+}
+
+
+@Watch('color',{ deep: true })
+onColorChanged() {
+  localStorage.color = this.color;
+  Color()
 }
 
   open(){

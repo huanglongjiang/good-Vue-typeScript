@@ -3,18 +3,18 @@ import App from './App.vue'
 import store from './vuex/store'
 import moment from 'moment';
 import constant from './vuex/const'
-import './registerServiceWorker'
 import router from './router'
-/*import store from './store'*/
 import axios from 'axios'
 import ElementUI from 'element-ui'
 import Ehartist from 'vue-chartist'
-import './button.css-1.0.4-2/css/button.css'
-import './button.css-1.0.4-2/chartist.min.css'
-import './button.css-1.0.4-2/style.css'
-import './button/style.css'
-import 'element-ui/lib/theme-chalk/index.css'    // 默认主题
 import Good from './views/index.js'
+import color from './../public/color.js'
+import 'element-ui/lib/theme-chalk/index.css'    // 默认主题
+import './registerServiceWorker'
+import './../public/button.css-1.0.4-2/css/button.css'
+import './../public/css/chartist.min.css'
+import './../public/css/style.css'
+color() //皮肤设置
 Vue.use(Good)
 Vue.config.productionTip = false
 Vue.use(ElementUI);
@@ -38,6 +38,7 @@ Vue.filter('moment', function (value, formatString) {
 
      
  })
+
 
 let num=0;
 axios.interceptors.request.use(

@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
 
-    <el-tag v-for="item in selectList" :key="item" closable :type="item" @close="handleClose(item)" v-if="selectList!=''">  {{item}} </el-tag>
+    <el-tag v-for="item in selectList" class="margin-right-5" :key="item" closable :type="item" @close="handleClose(item)" v-if="selectList!=''">  {{item}} </el-tag>
     <div class="border-bottom-1 border-eee padding-bottom-20 margin-bottom-20" style="overflow: auto;"></div>
     <div class="align-center clearfix">
         <template v-for="(item,index) in list">
@@ -110,3 +110,15 @@ export default class Index extends mixins( list) {
       }
 }
 </script>
+<style scoped>
+   .tag-group .tag-block{display: inline-table;}
+   .tag-group .tag-block:hover{color: #333;}
+   .el-tag{height: 24px;line-height: 24px;}
+   .el-tag.el-tag--info{
+    background-color: #e4e8f1;
+    border-color: #e4e8f1;
+    color: #48576a;
+    height: 24px;
+    line-height: 24px;
+   }
+</style>

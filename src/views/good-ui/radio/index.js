@@ -1,8 +1,8 @@
 import LoadingComponent from './index.vue'
-const Radio = {
+const goodRadio = {
   install:function (Vue) {
-    Vue.component('Radio',LoadingComponent)
+    Vue.component('goodRadio',LoadingComponent)
   }
 };
 // 导出组件
-export default Radio
+export default goodRadio

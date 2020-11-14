@@ -109,16 +109,16 @@
                     <tr>
                         <tds-label>用户类型：</tds-label>
                         <td>
-                            <el-radio v-model="form.role" label="0">普通用户</el-radio>
-                            <el-radio v-model="form.role" label="1">管理员</el-radio>
-                            <el-radio v-model="form.role" label="2" disabled>超级管理员</el-radio>
+                            <good-radio v-model="form.role" label="0">普通用户</good-radio>
+                            <good-radio v-model="form.role" label="1">管理员</good-radio>
+                            <good-radio v-model="form.role" label="2" disabled>超级管理员</good-radio>
                         </td>
                     </tr>
                     <tr>
                         <tds-label>服务状态：</tds-label>
                         <td>
-                            <el-radio v-model="form.status" label="0">冻结</el-radio>
-                            <el-radio v-model="form.status" label="1">正常</el-radio>
+                            <good-radio v-model="form.status" label="0">冻结</good-radio>
+                            <good-radio v-model="form.status" label="1">正常</good-radio>
                         </td>
                     </tr>
                 </table> 

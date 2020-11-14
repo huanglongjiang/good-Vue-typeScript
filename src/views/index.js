@@ -22,9 +22,9 @@ import goodCheckbox from './good-ui/checkbox'
 import goodStatusall from './good-ui/editAll';
 import goodStatus from './good-ui/status/'
 import goodSwitch from './good-ui/switch/'
+import goodRadio from './good-ui/radio';
 /*
 import Radio from './good-ui/Radio';
-import goodRadio from './good-ui/Radio3';
 import productCheckResult from "./good-ui/loading2/productCheckResult";
 import goodButton from './good-ui/button/'
 import goodInput from './good-ui/input/'
@@ -60,10 +60,10 @@ const components = {
 	goodStatusall,
 	goodStatus,
 	goodSwitch,
+	goodRadio,
 	
 	/*
 	Radio,
-	goodRadio,
 	productCheckResult,
 	goodInput,
 	goodTextarea,
@@ -96,9 +96,9 @@ Vue.use(components.goodCheckbox)
 Vue.use(components.goodStatusall)
 Vue.use(components.goodStatus)
 Vue.use(components.goodSwitch)
+Vue.use(components.goodRadio)
 /*Vue.prototype.constant2 = constant2;
 Vue.use(components.Radio)
-Vue.use(components.goodRadio)
 Vue.use(components.productCheckResult)
 Vue.use(components.goodInput)
 Vue.use(components.goodInput)

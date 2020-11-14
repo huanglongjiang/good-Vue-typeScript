@@ -16,7 +16,7 @@
                     </thead>
                     <tbody>
                     <template v-for="(item,index) in list">
-                        <tr v-if="item.type==2" style="height:45px;">
+                        <tr v-if="item.type==2" style="height:45px;" :key="index">
                             <td>
                                 <span class="pointer keys" v-if="permission.root_edit" @click="dialog(item)"  >{{index+1}}、{{item.name}}</span>
                                 <span class="keys" v-else>{{index+1}}、{{item.name}}</span>
@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import { Watch,Vue } from 'vue-property-decorator';
+import { Watch } from 'vue-property-decorator';
 import Component, { mixins } from 'vue-class-component'
 import { State } from 'vuex-class';
 import remove from './mixins/remove'   //删除
@@ -97,7 +97,7 @@ import edit from './mixins/edit'   //编辑
   mixins: [remove,list,edit],
 })
 export default class Index extends mixins( list) {
-  @State(state => state.state.permission) permission: any 
+  @State(state => state.state.permission) permission
   columnTitle='编辑栏目';
   dialogVisible=false
   dialogVisible2=false
@@ -120,7 +120,7 @@ export default class Index extends mixins( list) {
   }
 
   @Watch('listKeywords',{ deep: true })
-  onListKeywordsChanged(val) {
+  onListKeywordsChanged() {
     this.form.keywords=this.listKeywords.join(',')
   }
 
@@ -172,5 +172,7 @@ export default class Index extends mixins( list) {
     background-color: #e4e8f1;
     border-color: #e4e8f1;
     color: #48576a;
+    height: 24px;
+    line-height: 24px;
    }
 </style>

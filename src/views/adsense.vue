@@ -97,8 +97,8 @@
                     <tr>
                             <tds-label>服务状态</tds-label>
                             <td>
-                                <el-radio v-model="form.status" label="0">关闭</el-radio>
-                                <el-radio v-model="form.status" label="1">开启</el-radio>
+                                <good-radio v-model="form.status" label="0">关闭</good-radio>
+                                <good-radio v-model="form.status" label="1">开启</good-radio>
                             </td>
                         </tr>
                     <tr>

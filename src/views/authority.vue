@@ -92,16 +92,16 @@
                         <tr>
                             <tds-label star>类型</tds-label>
                             <td>
-                                <el-radio v-model="form.type" label="0">目录</el-radio>
-                                <el-radio v-model="form.type" label="1">菜单</el-radio>
-                                <el-radio v-model="form.type" label="2">按钮</el-radio>
+                                <good-radio v-model="form.type" label="0">目录</good-radio>
+                                <good-radio v-model="form.type" label="1">菜单</good-radio>
+                                <good-radio v-model="form.type" label="2">按钮</good-radio>
                             </td>
                         </tr>
                         <tr>
                             <tds-label star>是否含有子项</tds-label>
                             <td>
-                                <el-radio v-model="form.leaf" label="1">含有子项</el-radio>
-                                <el-radio v-model="form.leaf" label="0">没有子项</el-radio>
+                                <good-radio v-model="form.leaf" label="1">含有子项</good-radio>
+                                <good-radio v-model="form.leaf" label="0">没有子项</good-radio>
                             </td>
                         </tr>
                         

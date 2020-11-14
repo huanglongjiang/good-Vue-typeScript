@@ -82,17 +82,17 @@
                     <tr>
                        <tds-label>图片类型：</tds-label>
                        <td>
-                            <el-radio v-model="form.type" label="0">通用轮播图</el-radio>
-                            <el-radio v-model="form.type" label="1">首页轮播图</el-radio>
-                            <el-radio v-model="form.type" label="2">栏目页轮播图</el-radio>
-                            <el-radio v-model="form.type" label="3">内容页轮播图</el-radio>
+                            <good-radio v-model="form.type" label="0">通用轮播图</good-radio>
+                            <good-radio v-model="form.type" label="1">首页轮播图</good-radio>
+                            <good-radio v-model="form.type" label="2">栏目页轮播图</good-radio>
+                            <good-radio v-model="form.type" label="3">内容页轮播图</good-radio>
                        </td>
                     </tr>
                     <tr>
                        <tds-label>服务状态：</tds-label>
                        <td>
-                            <el-radio v-model="form.status" label="0">关闭</el-radio>
-                            <el-radio v-model="form.status" label="1">开启</el-radio>
+                            <good-radio v-model="form.status" label="0">关闭</good-radio>
+                            <good-radio v-model="form.status" label="1">开启</good-radio>
                        </td>
                     </tr>
                     <tr>
