@@ -27,7 +27,7 @@
 
   <ul class="align-left padding-20">
     <li class="block padding-5 font-size-14">切换主题</li>
-    <li class="block padding-5 font-size-14 pointer">
+    <li class="block padding-5 font-size-14">
         <el-color-picker v-model="color"></el-color-picker>
     </li>
   </ul>

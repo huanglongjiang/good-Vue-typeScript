@@ -127,11 +127,12 @@ import service from '@/service/index'
 
 @Component
 export default class Index extends Vue {
-    activeName= '0'
+    activeName= '1'
     form={
         name: '',
         email:'',
         pass:'',
+        origin:'2',
     }
 
   params={

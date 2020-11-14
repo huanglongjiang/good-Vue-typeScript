@@ -100,7 +100,7 @@ export default class Index extends mixins( list) {
 
   private created() {
     service.api(this.params).then(res =>{
-      
+        
         this.lastTime=res.data.last_time;
         this.$set(this.chartData,'labels',res.data.online_date)
         this.$set(this.chartData,'series',[res.data.online])
@@ -113,6 +113,7 @@ export default class Index extends mixins( list) {
         gsap.to(this.$data.data2, { duration: 0.5, rizhiTotal: data.rizhi_total });
         gsap.to(this.$data.data2, { duration: 0.5, todayTotal: data.today_total });
         gsap.to(this.$data.data2, { duration: 0.5, yesterdayTotal: data.yesterday_total });
+
     })
   }
 
