@@ -2,7 +2,7 @@
   <div class="layout inline-block margin-right-10">
       <div class="layout pointer" v-if="disabled==undefined" @click="selected(label)">
 
-        <span class="radio width-14 height-14 position-r top-2 inline-block radius-50 border-1 border-default is-checked" v-if="value===label"></span>
+        <span class="radio width-14 height-14 position-r top-2 inline-block radius-50 border-1 border-default is-checked3" v-if="value===label"></span>
 
         <span class="radio width-14 height-14 background-white position-r top-2 inline-block radius-50 border-1 border-default" v-else></span>
         <span class="font-size-14 padding-left-5" :class="{'color-dodgerblue2':value!==label,'color-primary':value===label}">
