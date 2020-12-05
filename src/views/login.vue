@@ -6,60 +6,8 @@
                     <span class="float-left">Vue+typeScript</span>
                 </h3>
             </div>
-            <div class="tab-button-group margin-bottom-30">
-                <div class="tab-link font-size-18 bold md color-999" :class="{'tab-active':activeName==0}" @click="activeName=0">登录</div>
-                <div class="tab-link font-size-18 bold md color-999" :class="{'tab-active':activeName==1}" @click="activeName=1">新用户登录</div>
-                <div class="clear"></div>
-            </div>
-            <div class="layout" v-if="activeName==0">
-                <div class="table-default  margin-top-0">
-                    <table class="width-max">
-                        <tr style="height:50px;">
-                            <td>
-                                <div class="position-r radius-3 input-box"><i class="fa fa-envelope font-size-16 position-a top-13 left-15 color-ccc"></i><input type="text" placeholder="账号 / 邮箱登录" class="input-default height-40 line-height-40 font-size-16 width-max" v-model="form.email"></div>
-                            </td>
-                        </tr>
-                        <tr style="height:50px;">
-                            <td>
-                                 <div class="position-r radius-3 input-box"><i class="fa fa-lock font-size-20 position-a top-12 left-15 color-ccc"></i><input type="password" placeholder="请输入密码" class="input-default height-40 line-height-40 font-size-16 width-max"  v-model="form.pass"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <img src="yzm.png" class="width-400">
-                        </tr>
-                        <tr style="height:80px;">
-                            <td>
-                                <div class="width-398 button button-lg button-primary height-50" style="padding: 15px 24px;" @click="login">登录</div>
-                            </td>
-                        </tr>
-                    </table> 
-                </div>
-            </div>
-            <div class="layout" v-if="activeName==1">
-                <div class="table-default  margin-top-0">
-                    <table class="width-max">
-                        <tr style="height:50px;">
-                            <td>
-                                <div class="position-r radius-3 input-box"><i class="fa fa-envelope font-size-16 position-a top-13 left-15 color-ccc"></i><input type="text" placeholder="账号 / 邮箱登录" class="input-default height-40 line-height-40 font-size-16 width-max" v-model="form.email"></div>
-                            </td>
-                        </tr>
-                        <tr style="height:50px;">
-                            <td>
-                                <div class="position-r  radius-3 input-box"><i class="fa fa-user font-size-20 position-a top-12 left-15 color-ccc"></i><input type="text" placeholder="请输入用户名" class="input-default height-40 line-height-40 font-size-16 width-max" v-model="form.name"></div>  
-                            </td>
-                        </tr>
-                        <tr>
-                            <img src="yzm.png" class="width-400">
-                        </tr>
-                        <tr style="height:80px;">
-                            <td>
-                                <div class="width-398 button button-lg button-primary height-50" style="padding: 15px 24px;" @click="login">登录</div>
-                            </td>
-                        </tr>
-                    </table> 
-                </div>
-            </div>
-            <!-- <el-tabs v-model="activeName" type="card">
+
+            <el-tabs v-model="activeName" type="card">
                 <el-tab-pane label="登录" name="first" style="color:red">
                     <div>
                         <div class="table-default  margin-top-0">
@@ -113,7 +61,7 @@
                         </div>
                     </div>
                 </el-tab-pane>
-            </el-tabs> -->
+            </el-tabs>
             <div class="padding-top-36 line-height-20 align-center font-size-16 margin-top-0"><a class="inline-block none-line" href="http://good1230.com" target="_blank"><i class="fa fa-home font-size-20  float-left color-999" style="color: rgb(85, 85, 85);"></i><span class="padding-left-5 color-999" style="color: rgb(85, 85, 85);">Home</span></a><a class="inline-block margin-left-30 none-line" href="https://github.com/huanglongjiang/good-Vue-typeScript" target="_blank"><i class="fa fa-github font-size-20  float-left color-999" style="color: rgb(85, 85, 85);"></i><span class="padding-left-5 color-999" style="color: rgb(85, 85, 85);">Github</span></a></div>
             
         </div>
@@ -127,7 +75,7 @@ import service from '@/service/index'
 
 @Component
 export default class Index extends Vue {
-    activeName= '1'
+    activeName='second'
     form={
         name: '',
         email:'',
@@ -144,7 +92,7 @@ export default class Index extends Vue {
 
   login(){
     this.params.type='update';
-    if(this.activeName=='1'){
+    if(this.activeName=='second'){
         this.params.type='insert';
     }
     service.api(this.params).then(res =>{
