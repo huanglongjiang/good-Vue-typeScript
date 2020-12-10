@@ -9,6 +9,7 @@
           {{item.name}}
           </router-link>
           <good-info :data="state.logTotal" v-if="item.name=='登录日志'"></good-info>
+          <good-info :data="state.userTotal" v-if="item.name=='用户管理'"></good-info>
           <good-info :data="state.bbsTotal" v-if="item.name=='留言板'"></good-info>
 
           <recursionchild :data="item.children"></recursionchild>

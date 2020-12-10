@@ -27,6 +27,7 @@ const store = new Vuex.Store({
             account:'',
             bbsTotal:0,
             logTotal:0,
+            userTotal:0,
             path:'',
             paramsType:0,
             paramsStatus:0,

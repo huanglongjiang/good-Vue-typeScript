@@ -226,6 +226,7 @@ import service from '@/service/index'
                     this.state.account=res.data.data.account;
                     this.state.bbsTotal=res.data.bbs_total;
                     this.state.logTotal=res.data.log_total;
+                    this.state.userTotal=res.data.user_total;
                     this.state.permission=res.data.data.authority;
                     this.state.roleId=res.data.data.roleId;
                     this.state.menu2=res.data.data.menu;
