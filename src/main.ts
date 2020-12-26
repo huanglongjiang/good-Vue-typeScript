@@ -11,7 +11,7 @@ import Good from './views/index.js'
 import color from './../public/color.js'
 import 'element-ui/lib/theme-chalk/index.css'    // 默认主题
 import './registerServiceWorker'
-import './../public/button.css-1.0.4-2/css/button.css'
+import './../public/button.css/css/button.css'
 import './../public/css/chartist.min.css'
 import './../public/css/style.css'
 color() //皮肤设置
