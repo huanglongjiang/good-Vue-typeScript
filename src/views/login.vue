@@ -91,6 +91,14 @@ export default class Index extends Vue {
   }
 
   login(){
+    const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if(!reg.test(this.form.email)){
+       this.$message({
+          message: '请输入正确邮箱',
+          type: 'info'
+        });
+      return
+    }
     this.params.type='update';
     if(this.activeName=='second'){
         this.params.type='insert';

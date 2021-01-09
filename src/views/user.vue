@@ -38,13 +38,13 @@
                                     </good-checkbox>
                                 </td> -->
                                 <td>
-                                    <div class="line-height-30 padding-3">
+                                    <div class="width-30 height-30 radius-20 overflow-hidden">
                                         <template v-if="item.file!=''">
-                                        <img :src="filePath+'/'+item.file" alt="" class="width-30 height-30 radius-20 block" v-if="item.file.length>7">
+                                        <img :src="filePath+'/'+item.file" alt="" class="width-max" v-if="item.file.length>7">
                                         <img :src="'http://www.good1230.com/good/RandomUser/'+item.file" alt="" class="width-30 height-30 radius-20 block" v-else>
                                     </template>
                                     <template v-else>
-                                        <img src="static/images/tianmao.jpg" alt="" class="width-30 height-30 radius-20 block">
+                                        <img src="static/images/tianmao.jpg" alt="" class="width-max">
                                     </template>
                                     </div>
                                     

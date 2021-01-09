@@ -1,9 +1,23 @@
 <template>
     <good-page>
         <good-breadcrumb :list="constant.breadcrumb.index" />
-        <good-box :data="true">
-        <div class="color-white clearfix padding-10">
-            <div class="height-220 align-center radius-5 padding-20 padding-20 float-left margin-right-20 margin-bottom-20" style="background: rgb(84, 173, 88); width: 48%; min-width: 400px; max-width: 500px;">
+        <div>
+        <div class="color-white margin-bottom-15 clearfix flex">
+            <div class="height-120 background-primary margin-right-15 radius-5 padding-20 padding-top-10 width-300"><div>当前用户访问次数<span class=" font-size-24 padding-top-10 position-r top-3 margin-left-10">{{loginTotal}}</span></div><div class=" font-size-16 padding-top-10">上一次访问时间是<span class=" block font-size-24 padding-top-10">{{lastTime}}</span></div></div>
+
+            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background:linear-gradient(60deg, #66bb6a, var(--primary));;"><span>用户</span><span class="block font-size-36 align-center">{{userTotal}}</span></div>
+
+            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background:linear-gradient(60deg, #962eaf, var(--primary));"><span>文章</span><span class="block font-size-36 align-center">{{articleTotal}}</span></div>
+            <div class="item height-120 background-red radius-5 padding-20" style="background: linear-gradient(60deg, #ec4c49, var(--primary));"><span>访问</span><span class="block font-size-36 align-center">{{rizhiTotal}}</span></div>
+            </div>
+
+        <div class="color-white flex align-center margin-bottom-15">
+         <div class="height-220 align-center radius-5 margin-right-15 width-300 background-primary">
+                <div class="height-110 width-300 radius-5 padding-top-20"><span>今日访问</span><span class="block font-size-36 align-center  padding-top-10">{{todayTotal}}</span></div>
+
+            <div class="height-110 width-300radius-5 padding-top-20"><span>昨日访问</span><span class="block font-size-36 align-center  padding-top-10">{{yesterdayTotal}}</span></div>
+            </div>
+            <div class="height-220 align-center radius-5 padding-20 padding-20 item margin-right-15" style="background: rgb(84, 173, 88); min-width: 400px;">
                 <div>
                     <chartist
                     ratio="ct-major-second"
@@ -15,7 +29,7 @@
                 <span>12日内访问量</span>
             </div>
 
-            <div class="height-220 align-center radius-5 padding-20 padding-20 float-left margin-right-20 margin-bottom-20" style="background:#962eaf; width: 48%; min-width: 400px; max-width: 500px;">
+            <div class="height-220 align-center radius-5 padding-20 padding-20 item" style="background:#962eaf; min-width: 400px;">
                 <div>
                     <chartist
                     ratio="ct-major-second"
@@ -26,20 +40,92 @@
                 </div>
                 <span>12日内访问量</span>
             </div>
-            <div class="clear"></div>
-            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(32, 160, 255); width: 28%; min-width: 360px;"><div>当前用户访问次数<span class=" block font-size-24 padding-top-10">{{loginTotal}}</span></div><div class="margin-top-20">上一次访问时间是<span class=" block font-size-24 padding-top-10">{{lastTime}}</span></div></div>
+           
 
-            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background:#f7ba2a; width: 28%; min-width: 360px;"><span>用户</span><span class="block font-size-36 margin-top-30 align-center">{{userTotal}}</span></div>
 
-            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: #f7ba2a; width: 28%; min-width: 360px;"><span>文章</span><span class="block font-size-36 margin-top-30 align-center">{{articleTotal}}</span></div>
+          </div>
 
-            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(32, 160, 255); width: 28%; min-width: 360px;"><span>访问</span><span class="block font-size-36 margin-top-30 align-center">{{rizhiTotal}}</span></div>
-
-            <div class="width-400 height-180 background-red margin-right-20 margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(247, 186, 42); width: 28%; min-width: 360px;"><span>今日访问</span><span class="block font-size-36 margin-top-30 align-center">{{todayTotal}}</span></div>
-
-            <div class="width-400 height-180 background-red margin-bottom-20 float-left radius-5 padding-20" style="background: rgb(247, 186, 42); width: 28%; min-width: 360px;"><span>昨日访问</span><span class="block font-size-36 margin-top-30 align-center">{{yesterdayTotal}}</span></div>
+  <div class="flex">
+      <div class="table-data item margin-right-15 background-white" style="box-shadow: 0px 0px 3px #ccc">
+                <table class="table-group line-height-30">
+                    <thead class="block-header">
+                        <tr>
+                            <th colspan="4">
+                              <div class="color-ccc"><i class="fa fa-list padding-right-10 "></i>最新文章</div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>图片</th>
+                            <th>发布作者</th>
+                            <th>标题</th>
+                            <th>发布时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template v-for="(item,index) in articleList">
+                            <tr :key="index">
+                                <td class="position-r">
+                                   <div class="width-30 height-30 radius-20 overflow-hidden">
+                                        <template v-if="item.file!=''">
+                                        <img :src="filePath+'/'+item.file" alt="" class="width-max" v-if="item.file.length>7">
+                                        <img :src="'http://www.good1230.com/good/RandomUser/'+item.file" alt="" class="width-30 height-30 radius-20 block" v-else>
+                                    </template>
+                                    <template v-else>
+                                        <img src="static/images/tianmao.jpg" alt="" class="width-max">
+                                    </template>
+                                    </div>
+                                </td>
+                                <td>{{item.account}}</td>
+                                <td>
+                                    <div class="width-max break">
+                                        <span>{{item.title}}</span>
+                                    </div>
+                                </td>
+                                <td>{{item.insertTime}}</td>
+                            </tr>
+                        </template>
+                    </tbody>    
+                </table> 
+     </div>
+     <div class="table-data item background-white" style="box-shadow: 0px 0px 3px #ccc">
+                <table class="table-group line-height-30">
+                    <thead class="block-header">
+                        <tr>
+                            <th colspan="4">
+                              <div class="color-ccc"><i class="fa fa-user padding-right-10 "></i>最新注册用户</div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>用户头像</th>
+                            <th>用户名</th>
+                            <th>注册时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template v-for="(item,index) in userList">
+                            <tr :class="{'background-disabled':item.status==0}" :key="index">
+                                <td>
+                                    <div class="width-30 height-30 radius-20 overflow-hidden">
+                                        <template v-if="item.file!=''">
+                                        <img :src="filePath+'/'+item.file" alt="" class="width-max" v-if="item.file.length>7">
+                                        <img :src="'http://www.good1230.com/good/RandomUser/'+item.file" alt="" class="width-30 height-30 radius-20 block" v-else>
+                                    </template>
+                                    <template v-else>
+                                        <img src="static/images/tianmao.jpg" alt="" class="width-max">
+                                    </template>
+                                    </div>
+                                    
+                                </td>
+                                <td><span>{{item.name}}</span></td>
+                                <td>{{item.time}}</td>
+                            </tr>
+                        </template>
+                    </tbody>    
+                </table> 
+     </div>
+     
+</div>
         </div>
-        </good-box>
     </good-page>
 </template>
 
@@ -59,7 +145,7 @@ export default class Index extends mixins( list) {
         series:[[0,0,0,0,0,0,0]],
     }
     chartOptions={
-        width: 460,
+        width: "100%",
         height: 150,
         low: 0,
        /* axisX: {
@@ -69,7 +155,7 @@ export default class Index extends mixins( list) {
         }*/
     }
   tweenedNumber=0
-
+filePath
   lastTime=''
   data2={
     loginTotal:0,
@@ -80,6 +166,8 @@ export default class Index extends mixins( list) {
     yesterdayTotal:0,
   }
   list
+  userList
+  articleList
   total
   google= "t-20008"
   params={
@@ -89,6 +177,24 @@ export default class Index extends mixins( list) {
 
   params2={}
 
+  params3={
+      google: "t-10010",
+      name: '',
+      operating: 'lists',
+      page: 0,
+      pagesize: 10,
+      role: '',
+      status: '',
+  }
+  params4={
+      fid: '',
+      google: "t-10008",
+      operating: "lists",
+      page: 0,
+      pagesize: 10,
+      title: '',
+      type: '',
+  }
 
   get loginTotal(){return this.data2.loginTotal.toFixed(0);}
   get userTotal(){return this.data2.userTotal.toFixed(0);}
@@ -99,6 +205,7 @@ export default class Index extends mixins( list) {
 
 
   private created() {
+    this.filePath=service.filePath();
     service.api(this.params).then(res =>{
         
         this.lastTime=res.data.last_time;
@@ -115,6 +222,15 @@ export default class Index extends mixins( list) {
         gsap.to(this.$data.data2, { duration: 0.5, yesterdayTotal: data.yesterday_total });
 
     })
+
+    service.api(this.params3).then(res =>{
+        this.userList=res.data.data
+    })
+    service.api(this.params4).then(res =>{
+        this.articleList=res.data.data
+    })
+
+
   }
 
 }
@@ -135,4 +251,12 @@ export default class Index extends mixins( list) {
     stroke-dasharray: 2px;
 }
 .ct-chart {height: 150px;}
+.flex{
+
+  display: flex;
+  flex-direction: row 
+}
+.item{flex: 1}
+.item2{width: 100px;}
+.table-data .table-group{background:#fff;}
 </style>

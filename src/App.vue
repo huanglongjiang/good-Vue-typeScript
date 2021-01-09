@@ -28,5 +28,5 @@
     }
   }
 }
-body{background: #f6f8f9}
+body{background: #f6f8f9; min-width: 1360px;}
 </style>

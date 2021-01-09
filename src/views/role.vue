@@ -23,11 +23,14 @@
                                 <td>
                                   <template v-for="item2 in item.image">
                                     <template v-if="item2.length<7">
-                                        
-                                      <img class="width-32 height-32 radius-20 float-left" style="margin-right: -5px; border:2px solid #fff" :src="'http://www.good1230.com/good/RandomUser/'+item2" :key="item2" />
+                                      <div class="width-32 height-32 radius-20 float-left  overflow-hidden" style="margin-right: -5px; border:2px solid #fff">
+                                        <img class="width-max" :src="'http://www.good1230.com/good/RandomUser/'+item2" :key="item2" />
+                                      </div>
                                     </template>
                                     <template v-else>
-                                      <img class="width-32 height-32 radius-20 float-left" style="margin-right: -5px; border:2px solid #fff" :src="filePath+'/'+item2" :key="item2" />
+                                      <div class="width-32 height-32 radius-20 float-left  overflow-hidden" style="margin-right: -5px; border:2px solid #fff">
+                                        <img class="width-max" :src="filePath+'/'+item2" :key="item2" />
+                                      </div>
                                     </template>
                                   </template>
                                   <span v-if="item.image.length>0" class="width-32 height-32  float-left color-999 line-height-32 font-size-12 margin-left-10" style="color:#0366d6">+{{item.image.length}}</span>
