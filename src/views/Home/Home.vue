@@ -2,9 +2,9 @@
   <div class="home">
     <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
     <Header :class="{'fixed-header':topFixed}"/>
-    <Sidebar class=" position-a top-0 bottom-0 z-index-10" :class="{'fleft-220':!sidebar,'left-0':sidebar}" style="transition:all 0.1s ease;"/>
-    <router-view class="margin-top-10" :class="{'margin-top-70':topFixed,'margin-top-10':!topFixed,'padding-left-220':sidebar,'padding-left-20':!sidebar}" style=" padding-right: 20px; min-height: 450px;transition:all 0.1s ease;"></router-view>
-    <Footer :class="{'padding-left-220':sidebar,'padding-left-20':!sidebar}" style="transition:all 0.1s ease;"/>
+    <Sidebar class=" position-a top-0 bottom-0 z-index-10" :class="{'fleft-220':sidebar,'left-0':!sidebar}" style="transition:all 0.1s ease;"/>
+    <router-view class="margin-top-10" :class="{'margin-top-70':topFixed,'margin-top-10':!topFixed,'padding-left-220':!sidebar,'padding-left-20':sidebar}" style=" padding-right: 20px; min-height: 450px;transition:all 0.1s ease;"></router-view>
+    <Footer :class="{'padding-left-220':!sidebar,'padding-left-20':sidebar}" style="transition:all 0.1s ease;"/>
   </div>
 </template>
 
