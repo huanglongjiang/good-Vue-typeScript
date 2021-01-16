@@ -1,23 +1,32 @@
 <template>
-    <good-page>
+    <good-page class="index">
         <good-breadcrumb :list="constant.breadcrumb.index" />
         <div>
         <div class="color-white margin-bottom-15 clearfix flex">
-            <div class="height-120 margin-right-15 radius-5 padding-20 padding-top-10 width-300" style="background:linear-gradient(60deg, #2180FB, var(--primary));"><div>当前用户访问次数<span class=" font-size-24 padding-top-10 position-r top-3 margin-left-10">{{loginTotal}}</span></div><div class=" font-size-16 padding-top-10">上一次访问时间是<span class=" block font-size-24 padding-top-10">{{lastTime}}</span></div></div>
+            
 
-            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background:linear-gradient(60deg, #66bb6a, var(--primary));;"><span>用户</span><span class="block font-size-36 align-center">{{userTotal}}</span></div>
+            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background: linear-gradient(60deg, chocolate, var(--primary));"><span>今日访问</span><span class="block font-size-36 align-center">{{todayTotal}}</span></div>
 
-            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background:linear-gradient(60deg, #962eaf, var(--primary));"><span>文章</span><span class="block font-size-36 align-center">{{articleTotal}}</span></div>
-            <div class="item height-120 background-red radius-5 padding-20" style="background: linear-gradient(60deg, #ec4c49, var(--primary));"><span>访问</span><span class="block font-size-36 align-center">{{rizhiTotal}}</span></div>
-            </div>
+            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background: linear-gradient(60deg, cornflowerblue, var(--primary));"><span>昨日访问</span><span class="block font-size-36 align-center">{{yesterdayTotal}}</span></div>
+
+            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background: linear-gradient(60deg, #ec4c49, var(--primary));"><span>访问</span><span class="block font-size-36 align-center">{{rizhiTotal}}</span></div>
+
+            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background:linear-gradient(60deg, #66bb6a, var(--primary));"><span>用户</span><span class="block font-size-36 align-center">{{userTotal}}</span></div>
+
+            <div class="item height-120 background-red radius-5 padding-20" style="background:linear-gradient(60deg, #962eaf, var(--primary));"><span>文章</span><span class="block font-size-36 align-center">{{articleTotal}}</span></div>
+
+
+
+
+        </div>
 
         <div class="color-white flex align-center margin-bottom-15">
-         <div class="height-220 align-center radius-5 margin-right-15 width-300" style="background:#ec4c49">
+        <!--  <div class="height-220 align-center radius-5 margin-right-15 width-300" style="background:#ec4c49">
                 <div class="height-110 width-300 radius-5 padding-top-20"><span>今日访问</span><span class="block font-size-36 align-center  padding-top-10">{{todayTotal}}</span></div>
 
             <div class="height-110 width-300radius-5 padding-top-20"><span>昨日访问</span><span class="block font-size-36 align-center  padding-top-10">{{yesterdayTotal}}</span></div>
-            </div>
-            <div class="height-220 align-center radius-5 padding-20 padding-20 item margin-right-15" style="background: rgb(84, 173, 88); min-width: 400px;">
+            </div> -->
+            <div class="height-250 align-center radius-5 padding-20 padding-20 item margin-right-15" style="background:white;box-shadow: rgba(32, 33, 36, 0.28) 0px 0px 1px 0px;">
                 <div>
                     <chartist
                     ratio="ct-major-second"
@@ -26,10 +35,10 @@
                     :options="chartOptions" >
                 </chartist>
                 </div>
-                <span>12日内访问量</span>
+                <span class="color-999">12日内访问量</span>
             </div>
 
-            <div class="height-220 align-center radius-5 padding-20 padding-20 item" style="background:#962eaf; min-width: 400px;">
+            <div class="height-250 align-center radius-5 padding-20 padding-20 item" style="background:white;box-shadow: rgba(32, 33, 36, 0.28) 0px 0px 1px 0px;">
                 <div>
                     <chartist
                     ratio="ct-major-second"
@@ -38,7 +47,7 @@
                     :options="chartOptions" >
                 </chartist>
                 </div>
-                <span>12日内访问量</span>
+                <span class="color-999">12日内访问量</span>
             </div>
            
 
@@ -46,7 +55,7 @@
           </div>
 
   <div class="flex">
-      <div class="table-data item margin-right-15 background-white" style="box-shadow: 0px 0px 3px #ccc">
+      <div class="table-data item margin-right-15 background-white" style="box-shadow: rgba(32, 33, 36, 0.28) 0px 0px 1px 0px;">
                 <table class="table-group line-height-30">
                     <thead class="block-header">
                         <tr>
@@ -87,7 +96,7 @@
                     </tbody>    
                 </table> 
      </div>
-     <div class="table-data item background-white" style="box-shadow: 0px 0px 3px #ccc">
+     <div class="table-data item background-white" style="box-shadow: rgba(32, 33, 36, 0.28) 0px 0px 1px 0px;">
                 <table class="table-group line-height-30">
                     <thead class="block-header">
                         <tr>
@@ -146,7 +155,7 @@ export default class Index extends mixins( list) {
     }
     chartOptions={
         width: "100%",
-        height: 150,
+        height: 200,
         low: 0,
        /* axisX: {
             labelInterpolationFnc: function(value, index) {
@@ -155,7 +164,7 @@ export default class Index extends mixins( list) {
         }*/
     }
   tweenedNumber=0
-filePath
+  filePath
   lastTime=''
   data2={
     loginTotal:0,
@@ -237,20 +246,25 @@ filePath
 </script>
 
 
-<style type="text/css">
-.ct-major-second{height: 160px;}
-.ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut {
-    stroke: hsla(0,0%,100%,.8);
+<style type="text/css" scope>
+
+.index .ct-major-second{height: 200px;}
+.index .ct-series-a .ct-bar, 
+.index .ct-series-a .ct-line, 
+.index .ct-series-a .ct-point, 
+.index .ct-series-a .ct-slice-donut {
+    stroke: var(--primary)!important;
 }
-.ct-label {
-    color: hsla(0,0%,100%,.7);
+.index .ct-label {
+    color: rgba(0,0,0,.2)!important;
 }
-.ct-grid {
-    stroke: hsla(0,0%,100%,.2);
+.index .ct-grid {
+    stroke: rgba(0,0,0,.2)!important;
     stroke-width: 1px;
     stroke-dasharray: 2px;
 }
-.ct-chart {height: 150px;}
+
+.index .ct-chart {height: 200px;}
 .flex{
 
   display: flex;

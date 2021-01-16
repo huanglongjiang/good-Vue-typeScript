@@ -25,4 +25,7 @@ export default  {
   filePath: () => {
     return `/good2`
   },
+  api2: (params) => {
+    return axios.post(`http://100sucai.com/phpajax/${params}.php`,params).then(res => res).catch(err => err)
+  },
 }

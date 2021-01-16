@@ -69,6 +69,14 @@ let routes2= [
                       roles: true  // 该部分和权限相关
                     }
                 },
+                {
+                    path: '/access',
+                    name: 'access',
+                    component: resolve => require(['../views/access.vue'], resolve),
+                    meta: {
+                      roles: true  // 该部分和权限相关
+                    }
+                },
                 
                 {
                     path: '/keywords',

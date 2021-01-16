@@ -64,7 +64,7 @@
 }
 
 .icon {
-  width: 60px;
+  width: 62px;
   height: 60px;
 }
 @keyframes flyby {
