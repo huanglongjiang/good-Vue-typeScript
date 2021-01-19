@@ -2,23 +2,38 @@
     <good-page class="index">
         <good-breadcrumb :list="constant.breadcrumb.index" />
         <div>
+
+
         <div class="color-white margin-bottom-15 clearfix flex">
-            
+          
+            <div class="item height-120 background-red margin-right-15 radius-5 padding-20  position-r" style="background:linear-gradient(60deg,#66bb6a,#43a047);">
+            <span class="position-a bottom-20 fa fa-bar-chart font-size-36"></span>
+            <span>今日访问</span>
+            <span class="block font-size-36 align-center">{{todayTotal}}</span></div>
 
-            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background: linear-gradient(60deg, chocolate, var(--primary));"><span>今日访问</span><span class="block font-size-36 align-center">{{todayTotal}}</span></div>
+            <div class="item height-120 background-red margin-right-15 radius-5 padding-20  position-r" style="background:linear-gradient(60deg,#ec407a,#d81b60);">
+            <span class="position-a bottom-20 fa fa-bar-chart font-size-36"></span>
+            <span>昨日访问</span>
+            <span class="block font-size-36 align-center">{{yesterdayTotal}}</span></div>
 
-            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background: linear-gradient(60deg, cornflowerblue, var(--primary));"><span>昨日访问</span><span class="block font-size-36 align-center">{{yesterdayTotal}}</span></div>
+            <div class="item height-120 background-red margin-right-15 radius-5 padding-20  position-r" style="background:linear-gradient(60deg, #ffa726, #fb8c00);">
+            <span class="position-a bottom-20 fa fa-line-chart font-size-36"></span>
+            <span>访问</span>
+            <span class="block font-size-36 align-center">{{allTotal}}</span></div>
 
-            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background: linear-gradient(60deg, #ec4c49, var(--primary));"><span>访问</span><span class="block font-size-36 align-center">{{rizhiTotal}}</span></div>
+            <div class="item height-120 background-red margin-right-15 radius-5 padding-20 position-r" style="background: linear-gradient(60deg, #26c6da, #00acc1);">
+            <span class="position-a bottom-20 fa fa-user-plus font-size-36"></span>
+            <span>用户</span>
+            <span class="block font-size-36 align-center">{{userTotal}}</span></div>
 
-            <div class="item height-120 background-red margin-right-15 radius-5 padding-20" style="background:linear-gradient(60deg, #66bb6a, var(--primary));"><span>用户</span><span class="block font-size-36 align-center">{{userTotal}}</span></div>
-
-            <div class="item height-120 background-red radius-5 padding-20" style="background:linear-gradient(60deg, #962eaf, var(--primary));"><span>文章</span><span class="block font-size-36 align-center">{{articleTotal}}</span></div>
-
-
+            <div class="item height-120 background-red radius-5 padding-20 position-r" style="background: linear-gradient(60deg, #ef5350, #e53935);">
+            <span class="position-a bottom-20 fa fa-list-ol font-size-36"></span>
+            <span>文章</span>
+            <span class="block font-size-36 align-center">{{articleTotal}}</span></div>
 
 
         </div>
+        
 
         <div class="color-white flex align-center margin-bottom-15">
         <!--  <div class="height-220 align-center radius-5 margin-right-15 width-300" style="background:#ec4c49">
@@ -157,6 +172,7 @@ export default class Index extends mixins( list) {
         width: "100%",
         height: 200,
         low: 0,
+        showArea: true
        /* axisX: {
             labelInterpolationFnc: function(value, index) {
               return 30 % 2 === 0 ? 10 : null;
@@ -170,13 +186,13 @@ export default class Index extends mixins( list) {
     loginTotal:0,
     userTotal:0,
     articleTotal:0,
-    rizhiTotal:0,
+    allTotal:0,
     todayTotal:0,
     yesterdayTotal:0,
   }
   list
-  userList
-  articleList
+  userList=[]
+  articleList=[]
   total
   google= "t-20008"
   params={
@@ -208,7 +224,7 @@ export default class Index extends mixins( list) {
   get loginTotal(){return this.data2.loginTotal.toFixed(0);}
   get userTotal(){return this.data2.userTotal.toFixed(0);}
   get articleTotal(){return this.data2.articleTotal.toFixed(0);}
-  get rizhiTotal(){return this.data2.rizhiTotal.toFixed(0);}
+  get allTotal(){return this.data2.allTotal.toFixed(0);}
   get todayTotal(){return this.data2.todayTotal.toFixed(0);}
   get yesterdayTotal(){return this.data2.yesterdayTotal.toFixed(0);}
 
@@ -216,17 +232,17 @@ export default class Index extends mixins( list) {
   private created() {
     this.filePath=service.filePath();
     service.api(this.params).then(res =>{
+        const data=res.data.data;
         
         this.lastTime=res.data.last_time;
-        this.$set(this.chartData,'labels',res.data.online_date)
-        this.$set(this.chartData,'series',[res.data.online])
+        this.$set(this.chartData,'labels',data.online_date)
+        this.$set(this.chartData,'series',[data.online])
 
-        const data=res.data;
 
         gsap.to(this.$data.data2, { duration: 0.5, loginTotal: data.login_total });
         gsap.to(this.$data.data2, { duration: 0.5, userTotal: data.user_total });
         gsap.to(this.$data.data2, { duration: 0.5, articleTotal: data.article_total });
-        gsap.to(this.$data.data2, { duration: 0.5, rizhiTotal: data.rizhi_total });
+        gsap.to(this.$data.data2, { duration: 0.5, allTotal: data.all_total });
         gsap.to(this.$data.data2, { duration: 0.5, todayTotal: data.today_total });
         gsap.to(this.$data.data2, { duration: 0.5, yesterdayTotal: data.yesterday_total });
 
@@ -254,6 +270,11 @@ export default class Index extends mixins( list) {
 .index .ct-series-a .ct-point, 
 .index .ct-series-a .ct-slice-donut {
     stroke: var(--primary)!important;
+}
+.index .ct-series-a .ct-area, 
+.index .ct-series-a .ct-slice-donut-solid, 
+.index .ct-series-a .ct-slice-pie{
+  fill: var(--primary)!important;
 }
 .index .ct-label {
     color: rgba(0,0,0,.2)!important;

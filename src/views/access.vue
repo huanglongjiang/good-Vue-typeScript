@@ -11,7 +11,7 @@
                     :options="chartOptions" >
                 </chartist>
                 </div>
-                <span class="color-999">博客近24分钟在线访问量</span>
+                <span class="color-999">近24分钟在线访问量</span>
             </good-box>
 
             <good-box class="height-250 margin-bottom-15 align-center overflow-hidden" :data="true">
@@ -23,7 +23,7 @@
                     :options="chartOptions" >
                 </chartist>
                 </div>
-                <span class="color-999">博客24小时访问量</span>
+                <span class="color-999">24小时访问量</span>
             </good-box>
 
             <good-box class="height-250 margin-bottom-15 align-center overflow-hidden" :data="true">
@@ -35,7 +35,7 @@
                     :options="chartOptions" >
                 </chartist>
                 </div>
-                <span class="color-999">博客近30日访问量</span>
+                <span class="color-999">近30日访问量</span>
             </good-box>
          </div>
     </good-page>
@@ -63,6 +63,7 @@ export default class Index extends Vue {
       width: '100%',
       height: 200,
       low: 0,
+      showArea: true
   }
   filePath
   total
@@ -110,6 +111,11 @@ export default class Index extends Vue {
 .access .ct-series-a .ct-slice-donut {
     stroke: var(--primary)!important;
 }
+.access .ct-series-a .ct-area, 
+.access .ct-series-a .ct-slice-donut-solid, 
+.access .ct-series-a .ct-slice-pie{
+  fill: var(--primary)!important;
+}
 .access .ct-label {
     color: rgba(0,0,0,.2)!important;
 }
@@ -118,6 +124,5 @@ export default class Index extends Vue {
     stroke-width: 1px;
     stroke-dasharray: 2px;
 }
-
 .access .ct-chart {height: 200px;}
 </style>

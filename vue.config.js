@@ -6,6 +6,15 @@ module.exports = {
   devServer: {
     port: 666,
     proxy: {
+      "/phpajax": {
+        //target:'http://127.0.0.1/',
+        target:'http://www.good1230.com/',
+        ws: true,
+        changeOrigin: true, //改变源
+        pathRewrite: {
+          '^/phpajax':'/phpajax'
+        }
+      },
       "/good": {
         //target:'http://127.0.0.1/',
         target:'http://www.good1230.com/',
