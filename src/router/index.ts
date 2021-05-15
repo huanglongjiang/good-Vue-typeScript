@@ -111,6 +111,14 @@ let routes2= [
                     }
                 },
                 {
+                    path: '/bookmark',
+                    name: 'bookmark',
+                    component: resolve => require(['../views/bookmark.vue'], resolve),
+                    meta: {
+                      roles: true  // 该部分和权限相关
+                    }
+                },
+                {
                     path: '/system',
                     name: 'system',
                     component: resolve => require(['../views/system.vue'], resolve),

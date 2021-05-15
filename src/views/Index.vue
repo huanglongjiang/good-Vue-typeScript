@@ -79,6 +79,7 @@
                             </th>
                         </tr>
                         <tr>
+                            <th>序号</th>
                             <th>图片</th>
                             <th>发布作者</th>
                             <th>标题</th>
@@ -88,6 +89,10 @@
                     <tbody>
                         <template v-for="(item,index) in articleList">
                             <tr :key="index">
+                                <td>
+                                    <span class="width-20 height-20 block radius-20 align-center line-height-20 color-white font-size-12" :class="setBackground(index)">
+                                    {{index+1}}</span>
+                                </td>
                                 <td class="position-r">
                                    <div class="width-30 height-30 radius-20 overflow-hidden">
                                         <template v-if="item.file!=''">
@@ -120,6 +125,7 @@
                             </th>
                         </tr>
                         <tr>
+                            <th>序号</th>
                             <th>用户头像</th>
                             <th>用户名</th>
                             <th>注册时间</th>
@@ -128,6 +134,10 @@
                     <tbody>
                         <template v-for="(item,index) in userList">
                             <tr :class="{'background-disabled':item.status==0}" :key="index">
+                                <td>
+                                    <span class="width-20 height-20 block radius-20 align-center line-height-20 color-white font-size-12" :class="setBackground(index)">
+                                    {{index+1}}</span>
+                                </td>
                                 <td>
                                     <div class="width-30 height-30 radius-20 overflow-hidden">
                                         <template v-if="item.file!=''">
@@ -256,6 +266,11 @@ export default class Index extends mixins( list) {
     })
 
 
+  }
+  setBackground(item){
+     return item===0?'background-one':
+     item===1?'background-two':
+     item===2?'background-three':'background-ddd'
   }
 
 }
